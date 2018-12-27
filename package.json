@@ -8,7 +8,8 @@
     "test": "node test.js"
   },
   "dependencies": {
-    "discord.js": "*"
+    "discord.js": "*",
+    "lowdb":"*"
   },
   "engines": {
     "node": "10.*"
