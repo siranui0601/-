@@ -1,0 +1,26 @@
+{
+  "name": "spika",
+  "version": "0.0.1",
+  "description": "discord bot",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "discord.js": "*"
+  },
+  "engines": {
+    "node": "10.*"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/my-glitch-app"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "discord.js"
+  ],
+  "author": "siranui"
+}
