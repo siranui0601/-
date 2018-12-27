@@ -659,7 +659,7 @@ function runCommand(client, message) {
                 }
                 var fs = require('fs');
 
-                fs.readFile('./main.js', 'utf8', function (err, text) {
+                fs.readFile('./server.js', 'utf8', function (err, text) {
                     const lines = text.split('\n') // 行ごとの配列
                     const line2 = text.split('\n').length;
 

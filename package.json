@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "discord.js": "*",
-    "lowdb":"*"
+    "lowdb":"*",
+    "node-fetch":"*"
   },
   "engines": {
     "node": "10.*"
