@@ -345,20 +345,7 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
     reportschannel.send(embed)
 })
 client.on('warn', (info) => {
-    let reportschannel = info.guild.channels.find(`name`, "スピカ-ろぐ");
-    if (!reportschannel) return;
-    var now = new Date();
-    var year = now.getFullYear();
-    var month = now.getMonth();
-    var date = now.getDate();
-    var hour = now.getHours();
-    var min = now.getMinutes();
-    let embed = new discord.RichEmbed()
-        .setTitle(`⚠️警告⚠️`)
-        .addField(info, "ですっ")
-        .setColor('#fa0000')
-        .setFooter('実行時刻：' + (year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分`)
-    reportschannel.send(embed)
+    console.log(info + `\n` + "ですっ")
 })
 client.on('roleCreate', (message, msgname) => {
     let reportschannel = message.guild.channels.find(`name`, "スピカ-ろぐ");
