@@ -9382,9 +9382,37 @@ client.on('message', message => {
             .setColor('#00fff2')
             .setFooter((year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分-${message.guild}`)
         client.channels.get('501351495267254272').send(embed2);
+        client.channels.get('528620617344352297').send(embed2);
         return;
     }
     if (message.channel.id === '501351495267254272') {
+        var now = new Date();
+        var now = new Date();
+        var year = now.getFullYear();
+        var month = now.getMonth();
+        var date = now.getDate();
+        var hour = now.getHours();
+        var min = now.getMinutes()
+        let embed3 = new discord.RichEmbed()
+            .setTitle(`返答を送信しました👌`)
+            .addField('返答内容', `${message.content}`)
+            .setColor('#00ffca')
+            .setFooter((year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分`)
+        var あいでぃー = message.content.split(" ");
+        if (message.content.slice(2).match(/　/)) {
+            var あいでぃー = message.content.split("　");
+        }
+        var 全文 = message.content.slice(18)
+        message.channel.send(embed3);
+        let embed4 = new discord.RichEmbed()
+            .setTitle(`返答を受信しました😆`)
+            .addField('返答内容', 全文)
+            .setColor('#00fff2')
+            .setFooter((year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分-${message.guild}`)
+        client.channels.get(あいでぃー[0]).send(embed4);
+        return;
+    }
+    if (message.channel.id === '528620617344352297') {
         var now = new Date();
         var now = new Date();
         var year = now.getFullYear();
@@ -9435,30 +9463,6 @@ client.on('message', async message => {
         return
     }
 })
-if(hour === 1){message.channel.send("一時になりましたっ")}
-if(hour === 2){message.channel.send("一時になりましたっ")}
-if(hour === 3){message.channel.send("一時になりましたっ")}
-if(hour === 4){message.channel.send("一時になりましたっ")}
-if(hour === 5){message.channel.send("一時になりましたっ")}
-if(hour === 6){message.channel.send("一時になりましたっ")}
-if(hour === 7){message.channel.send("一時になりましたっ")}
-if(hour === 8){message.channel.send("一時になりましたっ")}
-if(hour === 9){message.channel.send("一時になりましたっ")}
-if(hour === 10){message.channel.send("一時になりましたっ")}
-if(hour === 11){message.channel.send("一時になりましたっ")}
-if(hour === 12){message.channel.send("一時になりましたっ")}
-if(hour === 13){message.channel.send("一時になりましたっ")}
-if(hour === 14){message.channel.send("一時になりましたっ")}
-if(hour === 15){message.channel.send("一時になりましたっ")}
-if(hour === 16){message.channel.send("一時になりましたっ")}
-if(hour === 17){message.channel.send("一時になりましたっ")}
-if(hour === 18){message.channel.send("一時になりましたっ")}
-if(hour === 19){message.channel.send("一時になりましたっ")}
-if(hour === 20){message.channel.send("一時になりましたっ")}
-if(hour === 21){message.channel.send("一時になりましたっ")}
-if(hour === 22){message.channel.send("一時になりましたっ")}
-if(hour === 23){message.channel.send("一時になりましたっ")}
-if(hour === 24){message.channel.send("一時になりましたっ")}
 /*
   const filter0_0_h = m => m.content.startsWith('$左');
   msg.channel.awaitMessages(filter0_0_s, { max: 1,flag:!j0_0_s && j0_0_h && !j0_0_m && !j0_0_u,errors:['']})
