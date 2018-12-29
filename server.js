@@ -9435,6 +9435,30 @@ client.on('message', async message => {
         return
     }
 })
+if(hour === 1){message.channel.send("一時になりましたっ")}
+if(hour === 2){message.channel.send("一時になりましたっ")}
+if(hour === 3){message.channel.send("一時になりましたっ")}
+if(hour === 4){message.channel.send("一時になりましたっ")}
+if(hour === 5){message.channel.send("一時になりましたっ")}
+if(hour === 6){message.channel.send("一時になりましたっ")}
+if(hour === 7){message.channel.send("一時になりましたっ")}
+if(hour === 8){message.channel.send("一時になりましたっ")}
+if(hour === 9){message.channel.send("一時になりましたっ")}
+if(hour === 10){message.channel.send("一時になりましたっ")}
+if(hour === 11){message.channel.send("一時になりましたっ")}
+if(hour === 12){message.channel.send("一時になりましたっ")}
+if(hour === 13){message.channel.send("一時になりましたっ")}
+if(hour === 14){message.channel.send("一時になりましたっ")}
+if(hour === 15){message.channel.send("一時になりましたっ")}
+if(hour === 16){message.channel.send("一時になりましたっ")}
+if(hour === 17){message.channel.send("一時になりましたっ")}
+if(hour === 18){message.channel.send("一時になりましたっ")}
+if(hour === 19){message.channel.send("一時になりましたっ")}
+if(hour === 20){message.channel.send("一時になりましたっ")}
+if(hour === 21){message.channel.send("一時になりましたっ")}
+if(hour === 22){message.channel.send("一時になりましたっ")}
+if(hour === 23){message.channel.send("一時になりましたっ")}
+if(hour === 24){message.channel.send("一時になりましたっ")}
 /*
   const filter0_0_h = m => m.content.startsWith('$左');
   msg.channel.awaitMessages(filter0_0_s, { max: 1,flag:!j0_0_s && j0_0_h && !j0_0_m && !j0_0_u,errors:['']})
