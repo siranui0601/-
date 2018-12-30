@@ -9437,6 +9437,7 @@ client.on('message', message => {
             .setColor('#00fff2')
             .setFooter((year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分-${message.guild}`)
         client.channels.get(あいでぃー[0]).send(embed4);
+        client.channels.name.get("スピカinfo").send(embed4);
         return;
     }
 });
