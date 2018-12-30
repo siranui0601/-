@@ -9463,6 +9463,7 @@ client.on('message', async message => {
         return
     }
 })
+const activities_list = [ "with the &help command.", "with the developers console", "with some code", "with JavaScript" ];
 /*
   const filter0_0_h = m => m.content.startsWith('$左');
   msg.channel.awaitMessages(filter0_0_s, { max: 1,flag:!j0_0_s && j0_0_h && !j0_0_m && !j0_0_u,errors:['']})
