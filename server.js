@@ -438,7 +438,7 @@ client.on('ready', async message => {
     client.user.setPresence({
         status: 'online',
         game: {
-            name: 'In Mantinance',
+            name: '$help　new:R18',
             url: 'https://lil-sis-counter.glitch.me/'
         }
     });
