@@ -13,8 +13,7 @@
     "node-fetch":"*",
     "node-opus": "0.3.1",
     "indico.io": "^0.10.5",
-    "kuromoji-example":"*",
-    "kuromoji.js":"*",
+    "kuromoji": "^0.1.2",
     "fs": "^0.0.2",
     "express": "^4.16.4"
   },
