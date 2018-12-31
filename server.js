@@ -9464,7 +9464,25 @@ client.on('message', async message => {
         return
     }
 })
-const activities_list = [ "with the &help command.", "with the developers console", "with some code", "with JavaScript" ];
+var kuromoji = require('kuromoji');
+
+// この builder が辞書やら何やらをみて、形態素解析機を造ってくれるオブジェクトです。
+var builder = kuromoji.builder({
+    // ここで辞書があるパスを指定します。今回は kuromoji.js 標準の辞書があるディレクトリを指定
+    dicPath: 'node_modules/kuromoji/dist/dict'
+});
+
+// 形態素解析機を作るメソッド
+builder.build(function (err, tokenizer) {
+    // 辞書がなかったりするとここでエラーになります(´・ω・｀)
+    if (err) {
+        throw err;
+    }
+
+    // tokenizer.tokenize に文字列を渡すと、その文を形態素解析してくれます。
+    var tokens = tokenizer.tokenize("今日は森へ行った");
+    console.dir(tokens);
+});
 /*
   const filter0_0_h = m => m.content.startsWith('$左');
   msg.channel.awaitMessages(filter0_0_s, { max: 1,flag:!j0_0_s && j0_0_h && !j0_0_m && !j0_0_u,errors:['']})
