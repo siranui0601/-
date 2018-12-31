@@ -671,6 +671,36 @@ function runCommand(client, message) {
                 });
                 return;
             }
+            if (message.content.includes('文字')) {
+                var moji = require('kuromoji');
+                var kekka = message.content.split(" ");
+                if (message.content.slice(2).match(/　/)) {
+                    var kekka = message.content.split("　");
+                }
+                var builder = moji.builder({
+                    dicPath: 'node_modules/kuromoji/dict'
+                });
+                builder.build(function (err, tokenizer) {
+                    if (err) {
+                        throw err;
+                    }
+                    var tokens = tokenizer.tokenize(kekka[1]);
+                    console.dir(tokens);
+                    var result = [];
+                    for (var i = 0; i < tokens.length; i++) {
+                        result.push(`
+                        ${tokens[i].surface_form},\
+                        ${tokens[i].pos},\
+                        ${tokens[i].pos_detail_1},\
+                        ${tokens[i].pos_detail_2},\
+                        ${tokens[i].pos_detail_3},\
+                        ${tokens[i].conjugated_type},\
+                        ${tokens[i].conjugated_form}\n`)
+                    }
+                    var result1 = result.join("")
+                    message.channel.send("\`\`\`" + result1 + "\`\`\`");
+                })
+            }
             if (message.content.includes('心情')) {
                 var indico = require('indico.io');
                 indico.apiKey = process.env.indico_api_key
@@ -9464,36 +9494,6 @@ client.on('message', async message => {
         return
     }
 })
-if (message.content.includes('文字')) {
-    var moji = require('kuromoji');
-    var kekka = message.content.split(" ");
-    if (message.content.slice(2).match(/　/)) {
-        var kekka = message.content.split("　");
-    }
-    var builder = moji.builder({
-        dicPath: 'node_modules/kuromoji/dict'
-    });
-    builder.build(function (err, tokenizer) {
-        if (err) {
-            throw err;
-        }
-        var tokens = tokenizer.tokenize(kekka[1]);
-        console.dir(tokens);
-        var result = [];
-        for (var i = 0; i < tokens.length; i++) {
-            result.push(`
-            ${tokens[i].surface_form},\
-            ${tokens[i].pos},\
-            ${tokens[i].pos_detail_1},\
-            ${tokens[i].pos_detail_2},\
-            ${tokens[i].pos_detail_3},\
-            ${tokens[i].conjugated_type},\
-            ${tokens[i].conjugated_form}\n`)
-        }
-        var result1 = result.join("")
-        message.channel.send("\`\`\`" + result1 + "\`\`\`");
-    })
-}
 /*
   const filter0_0_h = m => m.content.startsWith('$左');
   msg.channel.awaitMessages(filter0_0_s, { max: 1,flag:!j0_0_s && j0_0_h && !j0_0_m && !j0_0_u,errors:['']})
