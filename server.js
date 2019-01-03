@@ -700,6 +700,7 @@ function runCommand(client, message) {
                     var result1 = result.join("")
                     message.channel.send("\`\`\`" + result1 + "\`\`\`");
                 })
+                return;
             }
             if (message.content.includes('心情')) {
                 var indico = require('indico.io');
