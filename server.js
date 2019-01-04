@@ -679,7 +679,16 @@ function runCommand(client, message) {
                 if (message.content.slice(2).match(/　/)) {
                     var kekka = message.content.split("　");
                 }
-                fs.writeFileSync( kekka[1]+".txt" , kekka[2] )
+                fs.writeFile( kekka[1]+".txt" , kekka[2] , (err) => {
+                    if(err){
+                        console.log("エラーが発生しました。" + err)
+                        throw err
+                      }
+                      // 書き出しに成功した場合
+                      else{
+                        console.log("ファイルが正常に書き出しされました")
+                      }
+                    });
                 return
             }
             if (message.content.includes('文字')) {
