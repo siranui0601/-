@@ -637,9 +637,9 @@ function runCommand(client, message) {
                     var kekka = message.content.split("　");
                 }
                 var b = new Buffer(kekka[1], 'hex')
-                message.channel.send("「__"+b.toString()+`__」\nよっ`);
-              message.channel.send("その暗号文は5秒後に消去されます")
-              message.delete(5000)
+                message.channel.send("「__" + b.toString() + `__」\nよっ`);
+                message.channel.send("その暗号文は5秒後に消去されます")
+                message.delete(5000)
             }
             if (message.content.includes('検索')) {
                 var kens = (message.content.slice(3));
@@ -705,151 +705,253 @@ ${tokens[i].conjugated_form}\n`)
                 return;
             }
             if (message.content.includes('アシタカ')) {
-              var fs = require('fs');
+                var fs = require('fs');
                 var moji = require('kuromoji');
                 var builder = moji.builder({
-                  dicPath: 'node_modules/kuromoji/dict'
+                    dicPath: 'node_modules/kuromoji/dict'
                 });
                 class Markov {
-                  constructor(n) {
-                    this.data = {};
-                  }
-                // データ登録
-                  add(words) {
-                    for(var i = 0; i <= words.length; i++) {
-                      var now = words[i];
-                      if(now === undefined) { now = null };
-                      var prev = words[i - 1];
-                      if(prev === undefined) { prev = null };
-                      
-                      if(this.data[prev] === undefined) {
-                        this.data[prev] = [];
-                      }
-                      this.data[prev].push(now);
+                    constructor(n) {
+                        this.data = {};
                     }
-                  }
-                // 指定された文字に続く文字をランダムに返す
-                  sample(word) {
-                    var words = this.data[word];
-                    if(words === undefined) { words = []; }
-              
-                    return words[Math.floor(Math.random() * words.length)];
-                  }
-                // マルコフ連鎖でつなげた文を返す
-                  make() {
-                    var sentence = [];
-                    var word = this.sample(null);
-                    while(word) {
-                      sentence.push(word);
-                      word = this.sample(word);
+                    // データ登録
+                    add(words) {
+                        for (var i = 0; i <= words.length; i++) {
+                            var now = words[i];
+                            if (now === undefined) {
+                                now = null
+                            };
+                            var prev = words[i - 1];
+                            if (prev === undefined) {
+                                prev = null
+                            };
+
+                            if (this.data[prev] === undefined) {
+                                this.data[prev] = [];
+                            }
+                            this.data[prev].push(now);
+                        }
                     }
-                    return sentence.join('');
-                  }
+                    // 指定された文字に続く文字をランダムに返す
+                    sample(word) {
+                        var words = this.data[word];
+                        if (words === undefined) {
+                            words = [];
+                        }
+
+                        return words[Math.floor(Math.random() * words.length)];
+                    }
+                    // マルコフ連鎖でつなげた文を返す
+                    make() {
+                        var sentence = [];
+                        var word = this.sample(null);
+                        while (word) {
+                            sentence.push(word);
+                            word = this.sample(word);
+                        }
+                        return sentence.join('');
+                    }
                 }
-              
+
                 var markov = new Markov();
-              
-                builder.build(function(err, tokenizer) {
-                  if(err) { throw err; }
-              
-                  // アシタカ先輩の台詞を読み込む
-                  fs.readFile('asitaka.txt', 'utf-8', function (err, data) {
-                    if(err) { throw err; }
-              
-                    var lines = data.split("\n"); // 一行ごとに分割
-                    lines.forEach(function(line) {
-                      var tokens = tokenizer.tokenize(line);
-              
-                    // トークンを文中表記にすべて変換
-                      var words = tokens.map(function(token) {
-                        return token.surface_form;
-                      });
-              
-                    // データを登録
-                      markov.add(words);
-                    });  
-              
-                    // 10回くらい生成してみる
-                    for(var n = 0; n < 10; n++) {
-                      message.channel.send(markov.make());
+
+                builder.build(function (err, tokenizer) {
+                    if (err) {
+                        throw err;
                     }
-                  });
+
+                    // アシタカ先輩の台詞を読み込む
+                    fs.readFile('asitaka.txt', 'utf-8', function (err, data) {
+                        if (err) {
+                            throw err;
+                        }
+
+                        var lines = data.split("\n"); // 一行ごとに分割
+                        lines.forEach(function (line) {
+                            var tokens = tokenizer.tokenize(line);
+
+                            // トークンを文中表記にすべて変換
+                            var words = tokens.map(function (token) {
+                                return token.surface_form;
+                            });
+
+                            // データを登録
+                            markov.add(words);
+                        });
+
+                        // 10回くらい生成してみる
+                        for (var n = 0; n < 10; n++) {
+                            message.channel.send(markov.make());
+                        }
+                    });
                 });
                 return;
-              }
-          if (message.content.includes('ツンデレ')) {
-              var fs = require('fs');
+            }
+            if (message.content.includes('ツンデレ')) {
+                var fs = require('fs');
                 var moji = require('kuromoji');
                 var builder = moji.builder({
-                  dicPath: 'node_modules/kuromoji/dict'
+                    dicPath: 'node_modules/kuromoji/dict'
                 });
                 class Markov {
-                  constructor(n) {
-                    this.data = {};
-                  }
-                // データ登録
-                  add(words) {
-                    for(var i = 0; i <= words.length; i++) {
-                      var now = words[i];
-                      if(now === undefined) { now = null };
-                      var prev = words[i - 1];
-                      if(prev === undefined) { prev = null };
-                      
-                      if(this.data[prev] === undefined) {
-                        this.data[prev] = [];
-                      }
-                      this.data[prev].push(now);
+                    constructor(n) {
+                        this.data = {};
                     }
-                  }
-                // 指定された文字に続く文字をランダムに返す
-                  sample(word) {
-                    var words = this.data[word];
-                    if(words === undefined) { words = []; }
-              
-                    return words[Math.floor(Math.random() * words.length)];
-                  }
-                // マルコフ連鎖でつなげた文を返す
-                  make() {
-                    var sentence = [];
-                    var word = this.sample(null);
-                    while(word) {
-                      sentence.push(word);
-                      word = this.sample(word);
+                    // データ登録
+                    add(words) {
+                        for (var i = 0; i <= words.length; i++) {
+                            var now = words[i];
+                            if (now === undefined) {
+                                now = null
+                            };
+                            var prev = words[i - 1];
+                            if (prev === undefined) {
+                                prev = null
+                            };
+
+                            if (this.data[prev] === undefined) {
+                                this.data[prev] = [];
+                            }
+                            this.data[prev].push(now);
+                        }
                     }
-                    return sentence.join('');
-                  }
+                    // 指定された文字に続く文字をランダムに返す
+                    sample(word) {
+                        var words = this.data[word];
+                        if (words === undefined) {
+                            words = [];
+                        }
+
+                        return words[Math.floor(Math.random() * words.length)];
+                    }
+                    // マルコフ連鎖でつなげた文を返す
+                    make() {
+                        var sentence = [];
+                        var word = this.sample(null);
+                        while (word) {
+                            sentence.push(word);
+                            word = this.sample(word);
+                        }
+                        return sentence.join('');
+                    }
                 }
-              
+
                 var markov = new Markov();
-              
-                builder.build(function(err, tokenizer) {
-                  if(err) { throw err; }
-              
-                  // アシタカ先輩の台詞を読み込む
-                  fs.readFile('tundere.txt', 'utf-8', function (err, data) {
-                    if(err) { throw err; }
-              
-                    var lines = data.split("\n"); // 一行ごとに分割
-                    lines.forEach(function(line) {
-                      var tokens = tokenizer.tokenize(line);
-              
-                    // トークンを文中表記にすべて変換
-                      var words = tokens.map(function(token) {
-                        return token.surface_form;
-                      });
-              
-                    // データを登録
-                      markov.add(words);
-                    });  
-              
-                    // 10回くらい生成してみる
-                    for(var n = 0; n < 10; n++) {
-                      message.channel.send(markov.make());
+
+                builder.build(function (err, tokenizer) {
+                    if (err) {
+                        throw err;
                     }
-                  });
+
+                    // アシタカ先輩の台詞を読み込む
+                    fs.readFile('tundere.txt', 'utf-8', function (err, data) {
+                        if (err) {
+                            throw err;
+                        }
+
+                        var lines = data.split("\n"); // 一行ごとに分割
+                        lines.forEach(function (line) {
+                            var tokens = tokenizer.tokenize(line);
+
+                            // トークンを文中表記にすべて変換
+                            var words = tokens.map(function (token) {
+                                return token.surface_form;
+                            });
+
+                            // データを登録
+                            markov.add(words);
+                        });
+
+                        // 10回くらい生成してみる
+                        for (var n = 0; n < 10; n++) {
+                            message.channel.send(markov.make());
+                        }
+                    });
                 });
                 return;
-              }
+            }
+            if (message.content.includes('中二')) {
+                var fs = require('fs');
+                var moji = require('kuromoji');
+                var builder = moji.builder({
+                    dicPath: 'node_modules/kuromoji/dict'
+                });
+                class Markov {
+                    constructor(n) {
+                        this.data = {};
+                    }
+                    // データ登録
+                    add(words) {
+                        for (var i = 0; i <= words.length; i++) {
+                            var now = words[i];
+                            if (now === undefined) {
+                                now = null
+                            };
+                            var prev = words[i - 1];
+                            if (prev === undefined) {
+                                prev = null
+                            };
+
+                            if (this.data[prev] === undefined) {
+                                this.data[prev] = [];
+                            }
+                            this.data[prev].push(now);
+                        }
+                    }
+                    // 指定された文字に続く文字をランダムに返す
+                    sample(word) {
+                        var words = this.data[word];
+                        if (words === undefined) {
+                            words = [];
+                        }
+
+                        return words[Math.floor(Math.random() * words.length)];
+                    }
+                    // マルコフ連鎖でつなげた文を返す
+                    make() {
+                        var sentence = [];
+                        var word = this.sample(null);
+                        while (word) {
+                            sentence.push(word);
+                            word = this.sample(word);
+                        }
+                        return sentence.join('');
+                    }
+                }
+
+                var markov = new Markov();
+
+                builder.build(function (err, tokenizer) {
+                    if (err) {
+                        throw err;
+                    }
+
+                    fs.readFile('tyuuni.txt', 'utf-8', function (err, data) {
+                        if (err) {
+                            throw err;
+                        }
+
+                        var lines = data.split("\n"); // 一行ごとに分割
+                        lines.forEach(function (line) {
+                            var tokens = tokenizer.tokenize(line);
+
+                            // トークンを文中表記にすべて変換
+                            var words = tokens.map(function (token) {
+                                return token.surface_form;
+                            });
+
+                            // データを登録
+                            markov.add(words);
+                        });
+
+                        // 10回くらい生成してみる
+                        for (var n = 0; n < 10; n++) {
+                            message.channel.send(markov.make());
+                        }
+                    });
+                });
+                return;
+            }
             if (message.content.includes('心情')) {
                 var indico = require('indico.io');
                 indico.apiKey = process.env.indico_api_key
