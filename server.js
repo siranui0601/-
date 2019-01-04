@@ -1705,14 +1705,14 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
                     .setTitle(`スピカのヘルプよっ！`)
                     .setDescription(`＜冒頭に$を忘れずに！＞`)
                     .addField('マルコフ', ` 󠂪󠂪󠂪`)
-                    .addField(`$[アシタカ/ツンデレ/中二]と打つと、\n文法上はともかく意味が変なセリフをそれぞれランダムに10個出します`,` 󠂪󠂪󠂪`)
+                    .addField(`$[アシタカ/ツンデレ/中二]と打つと、\n文法上はともかく意味が変なセリフをそれぞれランダムに10個出します`, ` 󠂪󠂪󠂪`)
                     .setColor('#00ffca')
                     .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/506888ebbfe90c0ba460d9fff1d7ff63.png?size=2048")
                     .setFooter('実行時刻：' + (year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分`)
                 message.channel.send(embed)
                 return;
             }
-          if (message.content.includes('help 口調')) {
+            if (message.content.includes('help 口調')) {
                 var zombiArray = client.guilds.map(a => a.name);
                 var zombi = 0;
                 for (var i = 0; i < zombiArray.length; i++) {
@@ -1731,15 +1731,15 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
                     .setTitle(`スピカのヘルプよっ！`)
                     .setDescription(`＜冒頭に$を忘れずに！＞`)
                     .addField('口調', ` 󠂪󠂪󠂪`)
-                    .addField(`「$口調 〇 ▲ □」と打つと、`,`〇は文章/▲は変更したい一人称/□/変更したい語尾`)
-                    .addField(`〇の中の一人称を▲に、\n〇の中の語尾を□\nに変更します`,`少々変な文になってしまうことがあります。ご了承ください`)
+                    .addField(`「$口調 〇 ▲ □」と打つと、`, `〇は文章/▲は変更したい一人称/□/変更したい語尾`)
+                    .addField(`〇の中の一人称を▲に、\n〇の中の語尾を□\nに変更します`, `少々変な文になってしまうことがあります。ご了承ください`)
                     .setColor('#00ffca')
                     .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/506888ebbfe90c0ba460d9fff1d7ff63.png?size=2048")
                     .setFooter('実行時刻：' + (year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分`)
                 message.channel.send(embed)
                 return;
             }
-          if (message.content.includes('help 文字')) {
+            if (message.content.includes('help 文字')) {
                 var zombiArray = client.guilds.map(a => a.name);
                 var zombi = 0;
                 for (var i = 0; i < zombiArray.length; i++) {
@@ -1758,8 +1758,8 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
                     .setTitle(`スピカのヘルプよっ！`)
                     .setDescription(`＜冒頭に$を忘れずに！＞`)
                     .addField('文字', ` 󠂪󠂪󠂪`)
-                    .addField(`「$口調 〇」と打つと、`,`〇は文章`)
-                    .addField(`〇を形態素解析します`,` 󠂪󠂪󠂪`)
+                    .addField(`「$口調 〇」と打つと、`, `〇は文章`)
+                    .addField(`〇を形態素解析します`, ` 󠂪󠂪󠂪`)
                     .setColor('#00ffca')
                     .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/506888ebbfe90c0ba460d9fff1d7ff63.png?size=2048")
                     .setFooter('実行時刻：' + (year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分`)
@@ -2387,21 +2387,21 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
                 })
                 return;
             }
-          if (message.content.includes('口調')) {
-            var kekka = message.content.split(" ");
-            if (message.content.slice(2).match(/　/)) {
-              var kekka = message.content.split("　");
+            if (message.content.includes('口調')) {
+                var kekka = message.content.split(" ");
+                if (message.content.slice(2).match(/　/)) {
+                    var kekka = message.content.split("　");
+                }
+                const kuti_1 = kekka[1].replace(/(あっし|我が輩｜我輩|吾輩|吾が輩|わが輩|あっしゃ|わたしゃあ|我|われ｜わたしゃ|あたしゃあ|おらぁ|ミー|わたしゃ|私|わっち|わたし|ワタシ|あたし|アタシ|ワッチ|自分|じぶん|俺様|俺|ぼくちゃん|ぼくちん|俺っち|僕|オレっち|オレ|おれっち|おれ|ぼく|ボク|あたくし|あたい|わて|わい|うち|俺等|己等|おいら|オイラ|おら|オラ|己|おいどん|うら|ぼかぁ)(?=(は|も|と|が|こそ|だ|で|でも|達|の|たち|、))/g, kekka[2])
+                const kuti_2 = kuti_1.replace(/(。|？|！|\!|\?|…|\.)/g, kekka[3] + "。")
+                if (kuti_2.slice(-1).match("。")) {
+                    message.channel.send(kuti_2)
+                } else {
+                    message.channel.send(kuti_2 + kekka[3])
+                }
+                return
             }
-            const kuti_1 = kekka[1].replace(/(あっし|我が輩｜我輩|吾輩|吾が輩|わが輩|あっしゃ|わたしゃあ|我|われ｜わたしゃ|あたしゃあ|おらぁ|ミー|わたしゃ|私|わっち|わたし|ワタシ|あたし|アタシ|ワッチ|自分|じぶん|俺様|俺|ぼくちゃん|ぼくちん|俺っち|僕|オレっち|オレ|おれっち|おれ|ぼく|ボク|あたくし|あたい|わて|わい|うち|俺等|己等|おいら|オイラ|おら|オラ|己|おいどん|うら|ぼかぁ)(?=(は|も|と|が|こそ|だ|で|でも|達|の|たち|、))/g,kekka[2])
-            const kuti_2 = kuti_1.replace(/(。|？|！|\!|\?|…|\.)/g, kekka[3]+"。")
-            if (kuti_2.slice(-1).match("。")) {
-              message.channel.send(kuti_2)
-            }else{
-              message.channel.send(kuti_2+kekka[3])
-            }
-            return
-          }
-          if (message.content.includes('解析')) {
+            if (message.content.includes('解析')) {
                 message.channel.send("んー、ちょっと待ってね")
                 var Rnull = message.content.replace(/[ 　]/g, "")
                 var indico = require('indico.io');
@@ -2481,37 +2481,37 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
                 if (message.content.slice(2).match(/　/)) {
                     var kekka = message.content.split("　");
                 }
-                fs.writeFile( kekka[1]+".txt" , kekka[2] , (err) => {
-                    if(err){
-                      message.channel.send("エラーが発生しました。" + err)
+                fs.writeFile(kekka[1] + ".txt", kekka[2], (err) => {
+                    if (err) {
+                        message.channel.send("エラーが発生しました。" + err)
                         throw err
-                      }
-                      // 書き出しに成功した場合
-                      else{
+                    }
+                    // 書き出しに成功した場合
+                    else {
                         message.channel.send("ファイルが正常に書き出しされました")
-                      }
-                    });
+                    }
+                });
                 return
             }
-          if (message.content.includes('追加')) {
+            if (message.content.includes('追加')) {
                 var fs = require('fs');
                 var kekka = message.content.split(" ");
                 if (message.content.slice(2).match(/　/)) {
                     var kekka = message.content.split("　");
                 }
-                fs.writeFile( kekka[1]+".txt" , kekka[2] , (err) => {
-                    if(err){
-                      message.channel.send("エラーが発生しました。" + err)
+                fs.writeFile(kekka[1] + ".txt", kekka[2], (err) => {
+                    if (err) {
+                        message.channel.send("エラーが発生しました。" + err)
                         throw err
-                      }
-                      // 書き出しに成功した場合
-                      else{
+                    }
+                    // 書き出しに成功した場合
+                    else {
                         message.channel.send("ファイルが正常に書き出しされました")
-                      }
-                    });
+                    }
+                });
                 return
             }
-            if (message.content.includes('文字')) {//.replace(/(\d|\D)/, kekka[3]+"。")
+            if (message.content.includes('文字')) { //.replace(/(\d|\D)/, kekka[3]+"。")
                 var moji = require('kuromoji');
                 var kekka = message.content.split(" ");
                 if (message.content.slice(2).match(/　/)) {
@@ -2839,23 +2839,23 @@ ${tokens[i].conjugated_form}\n`)
                     .catch(logError);
                 return;
             }
-          if (message.content.includes('gram')) {
-            var kekka = message.content.split(" ");
+            if (message.content.includes('gram')) {
+                var kekka = message.content.split(" ");
                 if (message.content.slice(5).match(/　/)) {
                     var kekka = message.content.split("　");
                 }
-          var ngram = function(words, n) {
-  var i;
-  var grams = [];
+                var ngram = function (words, n) {
+                    var i;
+                    var grams = [];
 
-  for(i=0; i<=words.length-n; i++) {
-    grams.push(words.substr(i, n).toLowerCase());
-  }
-  return grams;           
-}
-          var text = kekka[1];
-            message.channel.send(ngram(text,3))
-          }
+                    for (i = 0; i <= words.length - n; i++) {
+                        grams.push(words.substr(i, n).toLowerCase());
+                    }
+                    return grams;
+                }
+                var text = kekka[1];
+                message.channel.send(ngram(text, 3))
+            }
             if (message.content.includes('チノ')) {
                 message.react(client.emojis.find(emoji => emoji.name === "tino"))
                 return;
@@ -2922,7 +2922,7 @@ ${tokens[i].conjugated_form}\n`)
                     .setTitle(`スピカが入ってるサーバーは` + `
 全部で` + i + `つね！
 `)
-                .addField("```"+client.guilds.map(a => a.name)+"```"+`\n`+"よっ",false)
+                    .addField("```" + client.guilds.map(a => a.name) + "```" + `\n` + "よっ", false)
                     .setColor('#00ffca')
                     .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/506888ebbfe90c0ba460d9fff1d7ff63.png?size=2048")
                     .setFooter('実行時刻：' + (year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分`)
@@ -4335,7 +4335,7 @@ ${message.member.nickname}なんて動物同然よっ`,
                 message.channel.send(responce[global.randomInt(responce.length)]);
                 return;
             }
-            
+
             if (message.content.includes('ヤら')) {
                 var responce = [
                     'ん？何をやりたいの？今、ちょうど時間が空いたから一緒に遊んであげてもいいわよ',
