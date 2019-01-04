@@ -673,6 +673,15 @@ function runCommand(client, message) {
                 });
                 return;
             }
+            if (message.content.includes('追加')) {
+                var fs = require('fs');
+                var kekka = message.content.split(" ");
+                if (message.content.slice(2).match(/　/)) {
+                    var kekka = message.content.split("　");
+                }
+                fs.writeFileSync( kekka[1]+".txt" , kekka[2] )
+                return
+            }
             if (message.content.includes('文字')) {
                 var moji = require('kuromoji');
                 var kekka = message.content.split(" ");
