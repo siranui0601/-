@@ -681,12 +681,12 @@ function runCommand(client, message) {
                 }
                 fs.writeFile( kekka[1]+".txt" , kekka[2] , (err) => {
                     if(err){
-                        console.log("エラーが発生しました。" + err)
+                      message.channel.send("エラーが発生しました。" + err)
                         throw err
                       }
                       // 書き出しに成功した場合
                       else{
-                        console.log("ファイルが正常に書き出しされました")
+                        message.channel.send("ファイルが正常に書き出しされました")
                       }
                     });
                 return
