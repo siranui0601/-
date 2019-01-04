@@ -438,7 +438,7 @@ client.on('ready', async message => {
     client.user.setPresence({
         status: 'online',
         game: {
-            name: '$help　new:文字 [文章]',
+            name: '$help　new:口調',
             url: 'https://lil-sis-counter.glitch.me/'
         }
     });
@@ -510,7 +510,7 @@ client.on('ready', async message => {
                 .setTitle(`スピカのヘルプよっ！
 $help [コマンド] と打てば、特定のコマンドについてのヘルプを表示します。例：$help 進数`)
                 .setDescription(`＜冒頭に$を忘れずに！＞`)
-                .addField('会話', "`〇って呼んで`、`おは`、`語尾`、`マルコフ`、その他")
+                .addField('言葉', "`〇って呼んで`、`おは`、`語尾`、`マルコフ`、`口調`、その他")
                 .addField('計算', "`数字`、`進数`、`変換`、`を`、`倍数`、`ランダム数字`、`電卓`")
                 .addField('時間', "`今日は何の日`、`何時`、`タイマー`、`曜日`、`停止`")
                 .addField('面白', "`じゃんけん`、`くじ`、`問題`、`サイコロ`、`語尾`、`ランダム`、`スピカの確率`、`密会`、`暗号`、`R18`、`心情`　、目下製作中→`まるばつ`、`しりとり`、`脳トレ`")
@@ -599,426 +599,6 @@ function runCommand(client, message) {
             commands.run(client, message, args);
         } catch (err) {
             console.log()
-            if (message.content.includes('解析')) {
-                message.channel.send("んー、ちょっと待ってね")
-                var Rnull = message.content.replace(/[ 　]/g, "")
-                var indico = require('indico.io');
-                indico.apiKey = process.env.indico_api_key
-                var response = function (res) {
-                    message.channel.send(res);
-                }
-                var logError = function (err) {
-                    console.log(err);
-                }
-                var kekka = message.content.slice(3)
-                indico.imageRecognition(kekka)
-                    .then(response)
-                    .catch(logError);
-                return;
-            }
-            if (message.content.includes('暗号')) {
-                if (message.content.slice(-1).match(/号/)) {
-                    message.channel.send("暗号の後ろに暗号化したいひらがなぐらい打ちなさいよ！")
-                    return;
-                }
-                var kekka = message.content.split(" ");
-                if (message.content.slice(2).match(/　/)) {
-                    var kekka = message.content.split("　");
-                }
-                var b = new Buffer(kekka[1]);
-                message.channel.send(b.toString('hex'));
-                message.channel.send("そのメッセージは5秒後に消去されます")
-                message.delete(5000)
-                return;
-            }
-            if (message.content.includes('解読')) {
-                var kekka = message.content.split(" ");
-                if (message.content.slice(2).match(/　/)) {
-                    var kekka = message.content.split("　");
-                }
-                var b = new Buffer(kekka[1], 'hex')
-                message.channel.send("「__" + b.toString() + `__」\nよっ`);
-                message.channel.send("その暗号文は5秒後に消去されます")
-                message.delete(5000)
-            }
-            if (message.content.includes('検索')) {
-                var kens = (message.content.slice(3));
-                if (message.content.slice(3, 4).match(/[ 　]/)) {
-                    var kens = (message.content.slice(4));
-                }
-                var fs = require('fs');
-
-                fs.readFile('./server.js', 'utf8', function (err, text) {
-                    const lines = text.split('\n') // 行ごとの配列
-                    const line2 = text.split('\n').length;
-
-                    const index = lines.findIndex(line => ~line.indexOf(kens)) // どの行にあるか検索
-                    const result = ~index ? (index + 1) + '' : 'なかったわよ！'
-                    const index2 = lines.findIndex(line => ~line.indexOf(kens, result + 1))
-                    const result2 = ~index2 ? (index2 + 1) + '' : 'なかったわよ！'
-                    const index3 = lines.findIndex(line => ~line.indexOf(kens, result2 + 1))
-                    const result3 = ~index2 ? (index3 + 1) + '' : 'なかったわよ！'
-                    var nang = text.indexOf(kens) + 1
-                    var count = 0;
-                    var pos = text.indexOf(kens);
-                    while (pos !== -1) {
-                        count++;
-                        pos = text.indexOf(kens, pos + 1);
-                    }
-                    if (result == 'なかったわよ！') {
-                        message.channel.send('なかったわよ！')
-                        return;
-                    }
-                    message.channel.send(result + "/" + line2 + "行目（" + nang + `番目）にあったわ！` + `\n全部で` + count + `個あったわ`);
-                });
-                return;
-            }
-            if (message.content.includes('追加')) {
-                var fs = require('fs');
-                var kekka = message.content.split(" ");
-                if (message.content.slice(2).match(/　/)) {
-                    var kekka = message.content.split("　");
-                }
-                fs.writeFile( kekka[1]+".txt" , kekka[2] , (err) => {
-                    if(err){
-                      message.channel.send("エラーが発生しました。" + err)
-                        throw err
-                      }
-                      // 書き出しに成功した場合
-                      else{
-                        message.channel.send("ファイルが正常に書き出しされました")
-                      }
-                    });
-                return
-            }
-            if (message.content.includes('文字')) {
-                var moji = require('kuromoji');
-                var kekka = message.content.split(" ");
-                if (message.content.slice(2).match(/　/)) {
-                    var kekka = message.content.split("　");
-                }
-                var builder = moji.builder({
-                    dicPath: 'node_modules/kuromoji/dict'
-                });
-                builder.build(function (err, tokenizer) {
-                    if (err) {
-                        throw err;
-                    }
-                    var tokens = tokenizer.tokenize(kekka[1]);
-                    console.dir(tokens);
-                    var result = [];
-                    for (var i = 0; i < tokens.length; i++) {
-                        result.push(`
-${tokens[i].surface_form},\
-${tokens[i].pos},\
-${tokens[i].pos_detail_1},\
-${tokens[i].pos_detail_2},\
-${tokens[i].pos_detail_3},\
-${tokens[i].conjugated_type},\
-${tokens[i].conjugated_form}\n`)
-                    }
-                    var result1 = result.join("")
-                    message.channel.send("\`\`\`" + result1 + "\`\`\`");
-                })
-                return;
-            }
-            if (message.content.includes('アシタカ')) {
-                var fs = require('fs');
-                var moji = require('kuromoji');
-                var builder = moji.builder({
-                    dicPath: 'node_modules/kuromoji/dict'
-                });
-                class Markov {
-                    constructor(n) {
-                        this.data = {};
-                    }
-                    // データ登録
-                    add(words) {
-                        for (var i = 0; i <= words.length; i++) {
-                            var now = words[i];
-                            if (now === undefined) {
-                                now = null
-                            };
-                            var prev = words[i - 1];
-                            if (prev === undefined) {
-                                prev = null
-                            };
-
-                            if (this.data[prev] === undefined) {
-                                this.data[prev] = [];
-                            }
-                            this.data[prev].push(now);
-                        }
-                    }
-                    // 指定された文字に続く文字をランダムに返す
-                    sample(word) {
-                        var words = this.data[word];
-                        if (words === undefined) {
-                            words = [];
-                        }
-
-                        return words[Math.floor(Math.random() * words.length)];
-                    }
-                    // マルコフ連鎖でつなげた文を返す
-                    make() {
-                        var sentence = [];
-                        var word = this.sample(null);
-                        while (word) {
-                            sentence.push(word);
-                            word = this.sample(word);
-                        }
-                        return sentence.join('');
-                    }
-                }
-
-                var markov = new Markov();
-
-                builder.build(function (err, tokenizer) {
-                    if (err) {
-                        throw err;
-                    }
-
-                    // アシタカ先輩の台詞を読み込む
-                    fs.readFile('asitaka.txt', 'utf-8', function (err, data) {
-                        if (err) {
-                            throw err;
-                        }
-
-                        var lines = data.split("\n"); // 一行ごとに分割
-                        lines.forEach(function (line) {
-                            var tokens = tokenizer.tokenize(line);
-
-                            // トークンを文中表記にすべて変換
-                            var words = tokens.map(function (token) {
-                                return token.surface_form;
-                            });
-
-                            // データを登録
-                            markov.add(words);
-                        });
-
-                        // 10回くらい生成してみる
-                        for (var n = 0; n < 10; n++) {
-                            message.channel.send(markov.make());
-                        }
-                    });
-                });
-                return;
-            }
-            if (message.content.includes('ツンデレ')) {
-                var fs = require('fs');
-                var moji = require('kuromoji');
-                var builder = moji.builder({
-                    dicPath: 'node_modules/kuromoji/dict'
-                });
-                class Markov {
-                    constructor(n) {
-                        this.data = {};
-                    }
-                    // データ登録
-                    add(words) {
-                        for (var i = 0; i <= words.length; i++) {
-                            var now = words[i];
-                            if (now === undefined) {
-                                now = null
-                            };
-                            var prev = words[i - 1];
-                            if (prev === undefined) {
-                                prev = null
-                            };
-
-                            if (this.data[prev] === undefined) {
-                                this.data[prev] = [];
-                            }
-                            this.data[prev].push(now);
-                        }
-                    }
-                    // 指定された文字に続く文字をランダムに返す
-                    sample(word) {
-                        var words = this.data[word];
-                        if (words === undefined) {
-                            words = [];
-                        }
-
-                        return words[Math.floor(Math.random() * words.length)];
-                    }
-                    // マルコフ連鎖でつなげた文を返す
-                    make() {
-                        var sentence = [];
-                        var word = this.sample(null);
-                        while (word) {
-                            sentence.push(word);
-                            word = this.sample(word);
-                        }
-                        return sentence.join('');
-                    }
-                }
-
-                var markov = new Markov();
-
-                builder.build(function (err, tokenizer) {
-                    if (err) {
-                        throw err;
-                    }
-
-                    // アシタカ先輩の台詞を読み込む
-                    fs.readFile('tundere.txt', 'utf-8', function (err, data) {
-                        if (err) {
-                            throw err;
-                        }
-
-                        var lines = data.split("\n"); // 一行ごとに分割
-                        lines.forEach(function (line) {
-                            var tokens = tokenizer.tokenize(line);
-
-                            // トークンを文中表記にすべて変換
-                            var words = tokens.map(function (token) {
-                                return token.surface_form;
-                            });
-
-                            // データを登録
-                            markov.add(words);
-                        });
-
-                        // 10回くらい生成してみる
-                        for (var n = 0; n < 10; n++) {
-                            message.channel.send(markov.make());
-                        }
-                    });
-                });
-                return;
-            }
-            if (message.content.includes('中二')) {
-                var fs = require('fs');
-                var moji = require('kuromoji');
-                var builder = moji.builder({
-                    dicPath: 'node_modules/kuromoji/dict'
-                });
-                class Markov {
-                    constructor(n) {
-                        this.data = {};
-                    }
-                    // データ登録
-                    add(words) {
-                        for (var i = 0; i <= words.length; i++) {
-                            var now = words[i];
-                            if (now === undefined) {
-                                now = null
-                            };
-                            var prev = words[i - 1];
-                            if (prev === undefined) {
-                                prev = null
-                            };
-
-                            if (this.data[prev] === undefined) {
-                                this.data[prev] = [];
-                            }
-                            this.data[prev].push(now);
-                        }
-                    }
-                    // 指定された文字に続く文字をランダムに返す
-                    sample(word) {
-                        var words = this.data[word];
-                        if (words === undefined) {
-                            words = [];
-                        }
-
-                        return words[Math.floor(Math.random() * words.length)];
-                    }
-                    // マルコフ連鎖でつなげた文を返す
-                    make() {
-                        var sentence = [];
-                        var word = this.sample(null);
-                        while (word) {
-                            sentence.push(word);
-                            word = this.sample(word);
-                        }
-                        return sentence.join('');
-                    }
-                }
-
-                var markov = new Markov();
-
-                builder.build(function (err, tokenizer) {
-                    if (err) {
-                        throw err;
-                    }
-
-                    fs.readFile('tyuuni.txt', 'utf-8', function (err, data) {
-                        if (err) {
-                            throw err;
-                        }
-
-                        var lines = data.split("\n"); // 一行ごとに分割
-                        lines.forEach(function (line) {
-                            var tokens = tokenizer.tokenize(line);
-
-                            // トークンを文中表記にすべて変換
-                            var words = tokens.map(function (token) {
-                                return token.surface_form;
-                            });
-
-                            // データを登録
-                            markov.add(words);
-                        });
-
-                        // 10回くらい生成してみる
-                        for (var n = 0; n < 10; n++) {
-                            message.channel.send(markov.make());
-                        }
-                    });
-                });
-                return;
-            }
-            if (message.content.includes('心情')) {
-                var indico = require('indico.io');
-                indico.apiKey = process.env.indico_api_key
-                if (message.content.slice(3).match(/[\w]/)) {
-                    var response = function (res) {
-                        message.channel.send("この文のポジティブ度は...\n__**" + Math.round(res * 100) + "%**__よ！");
-                    }
-                    var logError = function (err) {
-                        console.log(err);
-                    }
-                    var kekka = message.content.slice(3)
-                    indico.sentimentHQ(kekka)
-                        .then(response)
-                        .catch(logError);
-                    return;
-                } else {
-                    message.channel.send('英語にしなさいよねっ！');
-                    return;
-                }
-            }
-            if (message.content.includes('R18')) {
-                message.channel.send("んー、ちょっと待ってね")
-                var Rnull = message.content.replace(/[ 　]/g, "")
-                var indico = require('indico.io');
-                indico.apiKey = process.env.indico_api_key
-                var response = function (res) {
-                    message.channel.send("この画像がR18な可能性は...\n__**" + Math.round(res * 100) + "%**__よ！");
-                    if (Math.round(res * 100) >= 70 && Math.round(res * 100) < 90) {
-                        message.channel.send("...おまわりさーん！こいつです！")
-                    };
-                    if (Math.round(res * 100) >= 90 && Math.round(res * 100) < 100) {
-                        message.channel.send("ばかばかばかぁ！```画像を削除しました```");
-                        message.delete()
-                    };
-                    if (Math.round(res * 100) >= 100) {
-                        message.channel.send("………。```画像を削除しました```");
-                        message.delete()
-                    }
-                }
-
-                var logError = function (err) {
-                    console.log(err);
-                }
-                var kekka = Rnull.slice(4)
-                indico.contentFiltering(kekka)
-                    .then(response)
-                    .catch(logError);
-                return;
-            }
             if (message.content.includes('〇って')) {
                 var responce = [
                     `さては、コピペしたわね？`
@@ -1056,7 +636,7 @@ ${tokens[i].conjugated_form}\n`)
                 message.channel.send(embed)
                 return;
             }
-            if (message.content.substring(1).startsWith('help 会話')) { //embed.setDescription('');
+            if (message.content.substring(1).startsWith('help 言葉')) { //embed.setDescription('');
                 var now = new Date();
                 var now = new Date();
                 var year = now.getFullYear();
@@ -1071,6 +651,7 @@ ${tokens[i].conjugated_form}\n`)
                     .addField('おは', " 󠂪󠂪")
                     .addField('語尾', " 󠂪󠂪")
                     .addField('マルコフ', " 󠂪󠂪")
+                    .addField('口調', " 󠂪󠂪")
                     .addField('その他', " 󠂪󠂪")
                     .setColor('#00ffca')
                     .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/506888ebbfe90c0ba460d9fff1d7ff63.png?size=2048")
@@ -2124,7 +1705,61 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
                     .setTitle(`スピカのヘルプよっ！`)
                     .setDescription(`＜冒頭に$を忘れずに！＞`)
                     .addField('マルコフ', ` 󠂪󠂪󠂪`)
-                    .addField(`$アシタカ/ツンデレ/中二と打つと、\n文法上はともかく意味が変なセリフをそれぞれランダムに10個出します`,false)
+                    .addField(`$[アシタカ/ツンデレ/中二]と打つと、\n文法上はともかく意味が変なセリフをそれぞれランダムに10個出します`,` 󠂪󠂪󠂪`)
+                    .setColor('#00ffca')
+                    .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/506888ebbfe90c0ba460d9fff1d7ff63.png?size=2048")
+                    .setFooter('実行時刻：' + (year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分`)
+                message.channel.send(embed)
+                return;
+            }
+          if (message.content.includes('help 口調')) {
+                var zombiArray = client.guilds.map(a => a.name);
+                var zombi = 0;
+                for (var i = 0; i < zombiArray.length; i++) {
+                    if (zombiArray[i] == 2) {
+                        zombi++;
+                    }
+                }
+                var now = new Date();
+                var now = new Date();
+                var year = now.getFullYear();
+                var month = now.getMonth();
+                var date = now.getDate();
+                var hour = now.getHours();
+                var min = now.getMinutes()
+                let embed = new discord.RichEmbed()
+                    .setTitle(`スピカのヘルプよっ！`)
+                    .setDescription(`＜冒頭に$を忘れずに！＞`)
+                    .addField('口調', ` 󠂪󠂪󠂪`)
+                    .addField(`「$口調 〇 ▲ □」と打つと、`,`〇は文章/▲は変更したい一人称/□/変更したい語尾`)
+                    .addField(`〇の中の一人称を▲に、\n〇の中の語尾を□\nに変更します`,`少々変な文になってしまうことがあります。ご了承ください`)
+                    .setColor('#00ffca')
+                    .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/506888ebbfe90c0ba460d9fff1d7ff63.png?size=2048")
+                    .setFooter('実行時刻：' + (year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分`)
+                message.channel.send(embed)
+                return;
+            }
+          if (message.content.includes('help 文字')) {
+                var zombiArray = client.guilds.map(a => a.name);
+                var zombi = 0;
+                for (var i = 0; i < zombiArray.length; i++) {
+                    if (zombiArray[i] == 2) {
+                        zombi++;
+                    }
+                }
+                var now = new Date();
+                var now = new Date();
+                var year = now.getFullYear();
+                var month = now.getMonth();
+                var date = now.getDate();
+                var hour = now.getHours();
+                var min = now.getMinutes()
+                let embed = new discord.RichEmbed()
+                    .setTitle(`スピカのヘルプよっ！`)
+                    .setDescription(`＜冒頭に$を忘れずに！＞`)
+                    .addField('文字', ` 󠂪󠂪󠂪`)
+                    .addField(`「$口調 〇」と打つと、`,`〇は文章`)
+                    .addField(`〇を形態素解析します`,` 󠂪󠂪󠂪`)
                     .setColor('#00ffca')
                     .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/506888ebbfe90c0ba460d9fff1d7ff63.png?size=2048")
                     .setFooter('実行時刻：' + (year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分`)
@@ -2750,6 +2385,458 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
 
 聖徒の息吹を靡かせよ！`)
                 })
+                return;
+            }
+          if (message.content.includes('口調')) {
+            var kekka = message.content.split(" ");
+            if (message.content.slice(2).match(/　/)) {
+              var kekka = message.content.split("　");
+            }
+            const kuti_1 = kekka[1].replace(/(あっし|我が輩｜我輩|吾輩|吾が輩|わが輩|あっしゃ|わたしゃあ|我|われ｜わたしゃ|あたしゃあ|おらぁ|ミー|わたしゃ|私|わっち|わたし|ワタシ|あたし|アタシ|ワッチ|自分|じぶん|俺様|俺|ぼくちゃん|ぼくちん|俺っち|僕|オレっち|オレ|おれっち|おれ|ぼく|ボク|あたくし|あたい|わて|わい|うち|俺等|己等|おいら|オイラ|おら|オラ|己|おいどん|うら|ぼかぁ)(?=(は|も|と|が|こそ|だ|で|でも|達|の|たち|、))/g,kekka[2])
+            const kuti_2 = kuti_1.replace(/(。|？|！|\!|\?|…|\.)/g, kekka[3]+"。")
+            if (kuti_2.slice(-1).match("。")) {
+              message.channel.send(kuti_2)
+            }else{
+              message.channel.send(kuti_2+kekka[3])
+            }
+            return
+          }
+          if (message.content.includes('解析')) {
+                message.channel.send("んー、ちょっと待ってね")
+                var Rnull = message.content.replace(/[ 　]/g, "")
+                var indico = require('indico.io');
+                indico.apiKey = process.env.indico_api_key
+                var response = function (res) {
+                    message.channel.send(res);
+                }
+                var logError = function (err) {
+                    console.log(err);
+                }
+                var kekka = message.content.slice(3)
+                indico.imageRecognition(kekka)
+                    .then(response)
+                    .catch(logError);
+                return;
+            }
+            if (message.content.includes('暗号')) {
+                if (message.content.slice(-1).match(/号/)) {
+                    message.channel.send("暗号の後ろに暗号化したいひらがなぐらい打ちなさいよ！")
+                    return;
+                }
+                var kekka = message.content.split(" ");
+                if (message.content.slice(2).match(/　/)) {
+                    var kekka = message.content.split("　");
+                }
+                var b = new Buffer(kekka[1]);
+                message.channel.send(b.toString('hex'));
+                message.channel.send("そのメッセージは5秒後に消去されます")
+                message.delete(5000)
+                return;
+            }
+            if (message.content.includes('解読')) {
+                var kekka = message.content.split(" ");
+                if (message.content.slice(2).match(/　/)) {
+                    var kekka = message.content.split("　");
+                }
+                var b = new Buffer(kekka[1], 'hex')
+                message.channel.send("「__" + b.toString() + `__」\nよっ`);
+                message.channel.send("その暗号文は5秒後に消去されます")
+                message.delete(5000)
+            }
+            if (message.content.includes('検索')) {
+                var kens = (message.content.slice(3));
+                if (message.content.slice(3, 4).match(/[ 　]/)) {
+                    var kens = (message.content.slice(4));
+                }
+                var fs = require('fs');
+
+                fs.readFile('./server.js', 'utf8', function (err, text) {
+                    const lines = text.split('\n') // 行ごとの配列
+                    const line2 = text.split('\n').length;
+
+                    const index = lines.findIndex(line => ~line.indexOf(kens)) // どの行にあるか検索
+                    const result = ~index ? (index + 1) + '' : 'なかったわよ！'
+                    const index2 = lines.findIndex(line => ~line.indexOf(kens, result + 1))
+                    const result2 = ~index2 ? (index2 + 1) + '' : 'なかったわよ！'
+                    const index3 = lines.findIndex(line => ~line.indexOf(kens, result2 + 1))
+                    const result3 = ~index2 ? (index3 + 1) + '' : 'なかったわよ！'
+                    var nang = text.indexOf(kens) + 1
+                    var count = 0;
+                    var pos = text.indexOf(kens);
+                    while (pos !== -1) {
+                        count++;
+                        pos = text.indexOf(kens, pos + 1);
+                    }
+                    if (result == 'なかったわよ！') {
+                        message.channel.send('なかったわよ！')
+                        return;
+                    }
+                    message.channel.send(result + "/" + line2 + "行目（" + nang + `番目）にあったわ！` + `\n全部で` + count + `個あったわ`);
+                });
+                return;
+            }
+            if (message.content.includes('追加')) {
+                var fs = require('fs');
+                var kekka = message.content.split(" ");
+                if (message.content.slice(2).match(/　/)) {
+                    var kekka = message.content.split("　");
+                }
+                fs.writeFile( kekka[1]+".txt" , kekka[2] , (err) => {
+                    if(err){
+                      message.channel.send("エラーが発生しました。" + err)
+                        throw err
+                      }
+                      // 書き出しに成功した場合
+                      else{
+                        message.channel.send("ファイルが正常に書き出しされました")
+                      }
+                    });
+                return
+            }
+          if (message.content.includes('追加')) {
+                var fs = require('fs');
+                var kekka = message.content.split(" ");
+                if (message.content.slice(2).match(/　/)) {
+                    var kekka = message.content.split("　");
+                }
+                fs.writeFile( kekka[1]+".txt" , kekka[2] , (err) => {
+                    if(err){
+                      message.channel.send("エラーが発生しました。" + err)
+                        throw err
+                      }
+                      // 書き出しに成功した場合
+                      else{
+                        message.channel.send("ファイルが正常に書き出しされました")
+                      }
+                    });
+                return
+            }
+            if (message.content.includes('文字')) {//.replace(/(\d|\D)/, kekka[3]+"。")
+                var moji = require('kuromoji');
+                var kekka = message.content.split(" ");
+                if (message.content.slice(2).match(/　/)) {
+                    var kekka = message.content.split("　");
+                }
+                var builder = moji.builder({
+                    dicPath: 'node_modules/kuromoji/dict'
+                });
+                builder.build(function (err, tokenizer) {
+                    if (err) {
+                        throw err;
+                    }
+                    var tokens = tokenizer.tokenize(kekka[1]);
+                    console.dir(tokens);
+                    var result = [];
+                    for (var i = 0; i < tokens.length; i++) {
+                        result.push(`
+${tokens[i].surface_form},\
+${tokens[i].pos},\
+${tokens[i].pos_detail_1},\
+${tokens[i].pos_detail_2},\
+${tokens[i].pos_detail_3},\
+${tokens[i].conjugated_type},\
+${tokens[i].conjugated_form}\n`)
+                    }
+                    var result1 = result.join("")
+                    message.channel.send("\`\`\`" + result1 + "\`\`\`");
+                })
+                return;
+            }
+            if (message.content.includes('アシタカ')) {
+                var fs = require('fs');
+                var moji = require('kuromoji');
+                var builder = moji.builder({
+                    dicPath: 'node_modules/kuromoji/dict'
+                });
+                class Markov {
+                    constructor(n) {
+                        this.data = {};
+                    }
+                    // データ登録
+                    add(words) {
+                        for (var i = 0; i <= words.length; i++) {
+                            var now = words[i];
+                            if (now === undefined) {
+                                now = null
+                            };
+                            var prev = words[i - 1];
+                            if (prev === undefined) {
+                                prev = null
+                            };
+
+                            if (this.data[prev] === undefined) {
+                                this.data[prev] = [];
+                            }
+                            this.data[prev].push(now);
+                        }
+                    }
+                    // 指定された文字に続く文字をランダムに返す
+                    sample(word) {
+                        var words = this.data[word];
+                        if (words === undefined) {
+                            words = [];
+                        }
+
+                        return words[Math.floor(Math.random() * words.length)];
+                    }
+                    // マルコフ連鎖でつなげた文を返す
+                    make() {
+                        var sentence = [];
+                        var word = this.sample(null);
+                        while (word) {
+                            sentence.push(word);
+                            word = this.sample(word);
+                        }
+                        return sentence.join('');
+                    }
+                }
+
+                var markov = new Markov();
+
+                builder.build(function (err, tokenizer) {
+                    if (err) {
+                        throw err;
+                    }
+
+                    // アシタカ先輩の台詞を読み込む
+                    fs.readFile('asitaka.txt', 'utf-8', function (err, data) {
+                        if (err) {
+                            throw err;
+                        }
+
+                        var lines = data.split("\n"); // 一行ごとに分割
+                        lines.forEach(function (line) {
+                            var tokens = tokenizer.tokenize(line);
+
+                            // トークンを文中表記にすべて変換
+                            var words = tokens.map(function (token) {
+                                return token.surface_form;
+                            });
+
+                            // データを登録
+                            markov.add(words);
+                        });
+
+                        // 10回くらい生成してみる
+                        for (var n = 0; n < 10; n++) {
+                            message.channel.send(markov.make());
+                        }
+                    });
+                });
+                return;
+            }
+            if (message.content.includes('ツンデレ')) {
+                var fs = require('fs');
+                var moji = require('kuromoji');
+                var builder = moji.builder({
+                    dicPath: 'node_modules/kuromoji/dict'
+                });
+                class Markov {
+                    constructor(n) {
+                        this.data = {};
+                    }
+                    // データ登録
+                    add(words) {
+                        for (var i = 0; i <= words.length; i++) {
+                            var now = words[i];
+                            if (now === undefined) {
+                                now = null
+                            };
+                            var prev = words[i - 1];
+                            if (prev === undefined) {
+                                prev = null
+                            };
+
+                            if (this.data[prev] === undefined) {
+                                this.data[prev] = [];
+                            }
+                            this.data[prev].push(now);
+                        }
+                    }
+                    // 指定された文字に続く文字をランダムに返す
+                    sample(word) {
+                        var words = this.data[word];
+                        if (words === undefined) {
+                            words = [];
+                        }
+
+                        return words[Math.floor(Math.random() * words.length)];
+                    }
+                    // マルコフ連鎖でつなげた文を返す
+                    make() {
+                        var sentence = [];
+                        var word = this.sample(null);
+                        while (word) {
+                            sentence.push(word);
+                            word = this.sample(word);
+                        }
+                        return sentence.join('');
+                    }
+                }
+
+                var markov = new Markov();
+
+                builder.build(function (err, tokenizer) {
+                    if (err) {
+                        throw err;
+                    }
+
+                    // アシタカ先輩の台詞を読み込む
+                    fs.readFile('tundere.txt', 'utf-8', function (err, data) {
+                        if (err) {
+                            throw err;
+                        }
+
+                        var lines = data.split("\n"); // 一行ごとに分割
+                        lines.forEach(function (line) {
+                            var tokens = tokenizer.tokenize(line);
+
+                            // トークンを文中表記にすべて変換
+                            var words = tokens.map(function (token) {
+                                return token.surface_form;
+                            });
+
+                            // データを登録
+                            markov.add(words);
+                        });
+
+                        // 10回くらい生成してみる
+                        for (var n = 0; n < 10; n++) {
+                            message.channel.send(markov.make());
+                        }
+                    });
+                });
+                return;
+            }
+            if (message.content.includes('中二')) {
+                var fs = require('fs');
+                var moji = require('kuromoji');
+                var builder = moji.builder({
+                    dicPath: 'node_modules/kuromoji/dict'
+                });
+                class Markov {
+                    constructor(n) {
+                        this.data = {};
+                    }
+                    // データ登録
+                    add(words) {
+                        for (var i = 0; i <= words.length; i++) {
+                            var now = words[i];
+                            if (now === undefined) {
+                                now = null
+                            };
+                            var prev = words[i - 1];
+                            if (prev === undefined) {
+                                prev = null
+                            };
+
+                            if (this.data[prev] === undefined) {
+                                this.data[prev] = [];
+                            }
+                            this.data[prev].push(now);
+                        }
+                    }
+                    // 指定された文字に続く文字をランダムに返す
+                    sample(word) {
+                        var words = this.data[word];
+                        if (words === undefined) {
+                            words = [];
+                        }
+
+                        return words[Math.floor(Math.random() * words.length)];
+                    }
+                    // マルコフ連鎖でつなげた文を返す
+                    make() {
+                        var sentence = [];
+                        var word = this.sample(null);
+                        while (word) {
+                            sentence.push(word);
+                            word = this.sample(word);
+                        }
+                        return sentence.join('');
+                    }
+                }
+
+                var markov = new Markov();
+
+                builder.build(function (err, tokenizer) {
+                    if (err) {
+                        throw err;
+                    }
+
+                    fs.readFile('tyuuni.txt', 'utf-8', function (err, data) {
+                        if (err) {
+                            throw err;
+                        }
+
+                        var lines = data.split("\n"); // 一行ごとに分割
+                        lines.forEach(function (line) {
+                            var tokens = tokenizer.tokenize(line);
+
+                            // トークンを文中表記にすべて変換
+                            var words = tokens.map(function (token) {
+                                return token.surface_form;
+                            });
+
+                            // データを登録
+                            markov.add(words);
+                        });
+
+                        // 10回くらい生成してみる
+                        for (var n = 0; n < 10; n++) {
+                            message.channel.send(markov.make());
+                        }
+                    });
+                });
+                return;
+            }
+            if (message.content.includes('心情')) {
+                var indico = require('indico.io');
+                indico.apiKey = process.env.indico_api_key
+                if (message.content.slice(3).match(/[\w]/)) {
+                    var response = function (res) {
+                        message.channel.send("この文のポジティブ度は...\n__**" + Math.round(res * 100) + "%**__よ！");
+                    }
+                    var logError = function (err) {
+                        console.log(err);
+                    }
+                    var kekka = message.content.slice(3)
+                    indico.sentimentHQ(kekka)
+                        .then(response)
+                        .catch(logError);
+                    return;
+                } else {
+                    message.channel.send('英語にしなさいよねっ！');
+                    return;
+                }
+            }
+            if (message.content.includes('R18')) {
+                message.channel.send("んー、ちょっと待ってね")
+                var Rnull = message.content.replace(/[ 　]/g, "")
+                var indico = require('indico.io');
+                indico.apiKey = process.env.indico_api_key
+                var response = function (res) {
+                    message.channel.send("この画像がR18な可能性は...\n__**" + Math.round(res * 100) + "%**__よ！");
+                    if (Math.round(res * 100) >= 70 && Math.round(res * 100) < 90) {
+                        message.channel.send("...おまわりさーん！こいつです！")
+                    };
+                    if (Math.round(res * 100) >= 90 && Math.round(res * 100) < 100) {
+                        message.channel.send("ばかばかばかぁ！```画像を削除しました```");
+                        message.delete()
+                    };
+                    if (Math.round(res * 100) >= 100) {
+                        message.channel.send("………。```画像を削除しました```");
+                        message.delete()
+                    }
+                }
+
+                var logError = function (err) {
+                    console.log(err);
+                }
+                var kekka = Rnull.slice(4)
+                indico.contentFiltering(kekka)
+                    .then(response)
+                    .catch(logError);
                 return;
             }
             if (message.content.includes('チノ')) {
