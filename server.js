@@ -2839,6 +2839,23 @@ ${tokens[i].conjugated_form}\n`)
                     .catch(logError);
                 return;
             }
+          if (message.content.includes('gram')) {
+            var kekka = message.content.split(" ");
+                if (message.content.slice(5).match(/　/)) {
+                    var kekka = message.content.split("　");
+                }
+          var ngram = function(words, n) {
+  var i;
+  var grams = [];
+
+  for(i=0; i<=words.length-n; i++) {
+    grams.push(words.substr(i, n).toLowerCase());
+  }
+  return grams;           
+}
+          var text = kekka[1];
+            message.channel.send(ngram(text,3))
+          }
             if (message.content.includes('チノ')) {
                 message.react(client.emojis.find(emoji => emoji.name === "tino"))
                 return;
