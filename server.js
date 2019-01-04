@@ -510,7 +510,7 @@ client.on('ready', async message => {
                 .setTitle(`スピカのヘルプよっ！
 $help [コマンド] と打てば、特定のコマンドについてのヘルプを表示します。例：$help 進数`)
                 .setDescription(`＜冒頭に$を忘れずに！＞`)
-                .addField('会話', "`〇って呼んで`、`おは`、`語尾`、その他")
+                .addField('会話', "`〇って呼んで`、`おは`、`語尾`、`マルコフ`、その他")
                 .addField('計算', "`数字`、`進数`、`変換`、`を`、`倍数`、`ランダム数字`、`電卓`")
                 .addField('時間', "`今日は何の日`、`何時`、`タイマー`、`曜日`、`停止`")
                 .addField('面白', "`じゃんけん`、`くじ`、`問題`、`サイコロ`、`語尾`、`ランダム`、`スピカの確率`、`密会`、`暗号`、`R18`、`心情`　、目下製作中→`まるばつ`、`しりとり`、`脳トレ`")
@@ -1052,6 +1052,7 @@ ${tokens[i].conjugated_form}\n`)
                     .addField('〇って呼んで', " 󠂪󠂪")
                     .addField('おは', " 󠂪󠂪")
                     .addField('語尾', " 󠂪󠂪")
+                    .addField('マルコフ', " 󠂪󠂪")
                     .addField('その他', " 󠂪󠂪")
                     .setColor('#00ffca')
                     .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/506888ebbfe90c0ba460d9fff1d7ff63.png?size=2048")
@@ -2080,6 +2081,32 @@ or
                     .addField(`「$help 〇」と打つと、特定のコマンドの詳しいhelpを表示します。
 特定のコマンドはスピカにメンションをするか、
 $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
+                    .setColor('#00ffca')
+                    .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/506888ebbfe90c0ba460d9fff1d7ff63.png?size=2048")
+                    .setFooter('実行時刻：' + (year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分`)
+                message.channel.send(embed)
+                return;
+            }
+            if (message.content.includes('help マルコフ')) {
+                var zombiArray = client.guilds.map(a => a.name);
+                var zombi = 0;
+                for (var i = 0; i < zombiArray.length; i++) {
+                    if (zombiArray[i] == 2) {
+                        zombi++;
+                    }
+                }
+                var now = new Date();
+                var now = new Date();
+                var year = now.getFullYear();
+                var month = now.getMonth();
+                var date = now.getDate();
+                var hour = now.getHours();
+                var min = now.getMinutes()
+                let embed = new discord.RichEmbed()
+                    .setTitle(`スピカのヘルプよっ！`)
+                    .setDescription(`＜冒頭に$を忘れずに！＞`)
+                    .addField('マルコフ', ` 󠂪󠂪󠂪`)
+                    .addField(`$アシタカ/ツンデレ/中二と打つと、\n文法上はともかく意味が変なセリフをそれぞれランダムに10個出します`,false)
                     .setColor('#00ffca')
                     .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/506888ebbfe90c0ba460d9fff1d7ff63.png?size=2048")
                     .setFooter('実行時刻：' + (year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分`)
