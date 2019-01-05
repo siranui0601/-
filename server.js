@@ -166,13 +166,6 @@ let 問題 = false;
 let 人権 = false;
 let 品質 = false;
 let 生産 = false;
-client.on('message', async message => {
-    if (message.content.includes('報告')) {
-        //   client.users.find('id', "430711354853425163").send("a")
-        message.channel.send("あああ")
-        return;
-    }
-})
 client.on('messageDelete', (message) => {
     if (message.author.bot) return;
     const reportschannel = message.guild.channels.find(r => r.name === "スピカ-ろぐ");
@@ -510,7 +503,7 @@ client.on('ready', async message => {
                 .setTitle(`スピカのヘルプよっ！
 $help [コマンド] と打てば、特定のコマンドについてのヘルプを表示します。例：$help 進数`)
                 .setDescription(`＜冒頭に$を忘れずに！＞`)
-                .addField('言葉', "`〇って呼んで`、`おは`、`語尾`、`マルコフ`、`口調`、その他")
+                .addField('言葉', "`〇って呼んで`、`おは`、`語尾`、`マルコフ`、`口調`、`文字`、その他")
                 .addField('計算', "`数字`、`進数`、`変換`、`を`、`倍数`、`ランダム数字`、`電卓`")
                 .addField('時間', "`今日は何の日`、`何時`、`タイマー`、`曜日`、`停止`")
                 .addField('面白', "`じゃんけん`、`くじ`、`問題`、`サイコロ`、`語尾`、`ランダム`、`スピカの確率`、`密会`、`暗号`、`R18`、`心情`　、目下製作中→`まるばつ`、`しりとり`、`脳トレ`")
@@ -1097,6 +1090,33 @@ or
                     .addField(`と言います。
 時差の関係上、24時近辺で使用すると
 おかしな時刻を示す場合があります。ご了承ください`, ` 󠂪󠂪󠂪`)
+                    .setColor('#00ffca')
+                    .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/506888ebbfe90c0ba460d9fff1d7ff63.png?size=2048")
+                    .setFooter('実行時刻：' + (year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分`)
+                message.channel.send(embed)
+                return;
+            }
+          if (message.content.includes('help 文字')) {
+                var zombiArray = client.guilds.map(a => a.name);
+                var zombi = 0;
+                for (var i = 0; i < zombiArray.length; i++) {
+                    if (zombiArray[i] == 2) {
+                        zombi++;
+                    }
+                }
+                var now = new Date();
+                var now = new Date();
+                var year = now.getFullYear();
+                var month = now.getMonth();
+                var date = now.getDate();
+                var hour = now.getHours();
+                var min = now.getMinutes()
+                let embed = new discord.RichEmbed()
+                    .setTitle(`スピカのヘルプよっ！`)
+                    .setDescription(`＜冒頭に$を忘れずに！＞`)
+                    .addField('文字', ` 󠂪󠂪󠂪`)
+                    .addField(`「$文字 〇」と打つと、`,`〇は文章`)
+                    .addField(`〇を形態素解析します`, ` 󠂪󠂪󠂪`)
                     .setColor('#00ffca')
                     .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/506888ebbfe90c0ba460d9fff1d7ff63.png?size=2048")
                     .setFooter('実行時刻：' + (year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分`)
@@ -2843,11 +2863,12 @@ ${tokens[i].conjugated_form}\n`)
                     .setTitle(`スピカが入ってるサーバーは` + `
 全部で` + i + `つね！
 `)
-                    .addField("```" + client.guilds.map(a => a.name) + "```" + `\n` + "よっ", false)
+               //     .addField("```" + client.guilds.map(a => a.name) + "```" + `\n` + "よっ", false)
                     .setColor('#00ffca')
                     .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/506888ebbfe90c0ba460d9fff1d7ff63.png?size=2048")
                     .setFooter('実行時刻：' + (year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分`)
                 message.channel.send(embed)
+              console.log(client.guilds.map(a => a.name))
                 return;
             }
             if (message.content.includes('役職')) {
@@ -2993,6 +3014,10 @@ ${tokens[i].conjugated_form}\n`)
             }
             if (message.content.includes('いたい')) {
                 message.channel.send('大丈夫...？あっ別に心配してるわけじゃないから。');
+                return;
+            }
+          if (message.content.includes('よろ')) {
+                message.channel.send('ん。よろしく。');
                 return;
             }
             //          if (message.content === ('how to embed')) {
@@ -9043,40 +9068,44 @@ ${message.member.nickname}なんて動物同然よっ`,
                 message.channel.send(embed)
                 return;
             }
-            if (message.content.includes('help')) {
-                var mys = client.guilds.map(a => a.name);
-                var zombiArray = client.guilds.map(a => a.name);
-                var zombi = 0;
-                for (var i = 0; i < zombiArray.length; i++) {
-                    if (zombiArray[i] == 2) {
-                        zombi++;
-                    }
+          if (message.content.includes('help')) {
+          var mys = client.guilds.map(a => a.name);
+            var zombiArray = client.guilds.map(a => a.name);
+            var zombi = 0;
+            for (var i = 0; i < zombiArray.length; i++) {
+                if (zombiArray[i] == 2) {
+                    zombi++;
                 }
-                var now = new Date();
-                var now = new Date();
-                var year = now.getFullYear();
-                var month = now.getMonth();
-                var date = now.getDate();
-                var hour = now.getHours();
-                var min = now.getMinutes()
-                let embed = new discord.RichEmbed()
-                    .setTitle(`スピカのヘルプよっ！
-$help [コマンド] と打てば、特定のコマンドについてのヘルプを表示します。例：$help 進数`)
-                    .setDescription(`＜冒頭に$を忘れずに！＞`)
-                    .addField('会話', "`〇って呼んで`、`おは`、`語尾`、その他")
-                    .addField('計算', "`数字`、`進数`、`変換`、`を`、`倍数`、`ランダム数字`、`電卓`")
-                    .addField('時間', "`今日は何の日`、`何時`、`タイマー`、`曜日`、`停止`")
-                    .addField('面白', "`じゃんけん`、`くじ`、`問題`、`サイコロ`、`語尾`、`ランダム`、`スピカの確率`、`密会`、`暗号`、`R18`、`心情`　、目下製作中→`まるばつ`、`しりとり`、`脳トレ`")
-                    .addField('管理', "`検索`、`リンク`、`ログ`、`ピン`、`絵文字`、`役職`、`help`")
-                    .addField('⬇️入っているサーバー合計⬇️', i)
-                    .addField(`スピカを招待したい場合、上のタイトルをクリックしてください。`, `その他質問・要望等がある場合、「**スピカhelp**」というチャンネルを作ると質問・要望を送信することができます。`)
-                    .setURL(`https://discordapp.com/api/oauth2/authorize?client_id=469474420050886657&permissions=1077275840&scope=bot`)
-                    .setColor('#00ffca')
-                    .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/ffaff4f5603ef14dc98fb492baabb34c.png?size=2048")
-                    .setFooter('実行時刻：' + (year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分`)
-                message.channel.send(embed)
-                return;
             }
+            var now = new Date();
+            var now = new Date();
+            var year = now.getFullYear();
+            var month = now.getMonth();
+            var date = now.getDate();
+            var hour = now.getHours();
+            var min = now.getMinutes()
+            let embed = new discord.RichEmbed()
+                .setTitle(`スピカのヘルプよっ！
+$help [コマンド] と打てば、特定のコマンドについてのヘルプを表示します。例：$help 進数`)
+                .setDescription(`＜冒頭に$を忘れずに！＞`)
+                .addField('言葉', "`〇って呼んで`、`おは`、`語尾`、`マルコフ`、`口調`、`文字`、その他")
+                .addField('計算', "`数字`、`進数`、`変換`、`を`、`倍数`、`ランダム数字`、`電卓`")
+                .addField('時間', "`今日は何の日`、`何時`、`タイマー`、`曜日`、`停止`")
+                .addField('面白', "`じゃんけん`、`くじ`、`問題`、`サイコロ`、`語尾`、`ランダム`、`スピカの確率`、`密会`、`暗号`、`R18`、`心情`　、目下製作中→`まるばつ`、`しりとり`、`脳トレ`")
+                .addField('管理', "`検索`、`リンク`、`ログ`、`ピン`、`絵文字`、`役職`、`help`")
+                .addField('⬇️入っているサーバー合計⬇️', i)
+                .addField(`スピカを招待したい場合、上のタイトルをクリックしてください。`, `その他質問・要望等がある場合、「**スピカhelp**」というチャンネルを作ると質問・要望を送信することができます。`)
+                .setURL(`https://discordapp.com/api/oauth2/authorize?client_id=469474420050886657&permissions=1077275840&scope=bot`)
+                .setColor('#00ffca')
+                .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/ffaff4f5603ef14dc98fb492baabb34c.png?size=2048")
+                .setFooter('実行時刻：' + (year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分`)
+            message.channel.send(embed)
+            return;
+        }
+          
+          
+          
+          
             if (message.content.includes('顔文字')) {
                 const client = require('cheerio-httpcli');
                 const p = client.fetch('https://www.webpagefx.com/tools/emoji-cheat-sheet/')
