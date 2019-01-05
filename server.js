@@ -2104,72 +2104,6 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
                 message.channel.send('言われた通り、機能を１０秒間停止させたわ');
                 return;
             }
-
-
-            if (message.content.includes('分')) {
-              var hun = message.content.slice(1,2);
-              if (message.content.slice(3,4).match("分")) {
-                var hun = message.content.slice(1,3);
-              }else if (message.content.slice(4,5).match("分")) {
-                var hun = message.content.slice(1,4);
-              }else if (message.content.slice(5,6).match("分")) {
-                var hun = message.content.slice(1,5);
-              }else if (message.content.slice(6,).match("分")) {
-                message.channel.send("そこまで大きいなら、「$〇時間」にしたらどう？")
-              }
-                message.channel.send('仕方ないわね。'+hun+'分くらい数えてあげるわ');
-                message.react('🕐');
-                function sleep(waitSec, callbackFunc) {
-                    var spanedSec = 0;
-                    var id = setInterval(function () {
-                        spanedSec++;
-                        if (spanedSec >= waitSec) {
-                            clearInterval(id);
-                            if (callbackFunc) callbackFunc();
-                        }
-                    }, 1000);
-                }
-                sleep(Number(hun*30), function () {
-                    message.channel.send('あと' + (hun*30) + '秒で'+hun+'分よ！！');
-                    sleep(Number(hun*30), function () {
-                        message.reply(hun+'分たったわよ！！');
-                        return;
-                    });
-                });
-                return
-            }
-            if (message.content.includes('時間')) {
-              var hun = message.content.slice(1,2);
-              if (message.content.slice(3,4).match("時")) {
-                var hun = message.content.slice(1,3);
-              }else if (message.content.slice(4,5).match("時")) {
-                var hun = message.content.slice(1,4);
-              }else if (message.content.slice(5,6).match("時")) {
-                var hun = message.content.slice(1,5);
-              }else if (message.content.slice(6,).match("時")) {
-                message.channel.send("そこまで大きい時間、覚えられないわよ！わ、悪かったわね！")
-              }
-                message.channel.send('仕方ないわね。'+hun+'時間くらい数えてあげるわ');
-                message.react('🕐');
-                function sleep(waitSec, callbackFunc) {
-                    var spanedSec = 0;
-                    var id = setInterval(function () {
-                        spanedSec++;
-                        if (spanedSec >= waitSec) {
-                            clearInterval(id);
-                            if (callbackFunc) callbackFunc();
-                        }
-                    }, 60000);//１分
-                }
-                sleep(Number(hun*30), function () {
-                    message.channel.send('あと' + (hun*30) + '分で'+hun+'時間よ！！');
-                    sleep(Number(hun*30), function () {
-                        message.reply(hun+'時間たったわよ！！');
-                        return;
-                    });
-                });
-                return
-            }
             if (message.content.includes('眠るな')) {
                 message.channel.send('私が寝落ちしないように、対策をつけたわ。12時間有効よ。');
                 message.react('🕐');
@@ -2390,10 +2324,7 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
             }
             if (message.content.includes('文字')) { //.replace(/(\d|\D)/, kekka[3]+"。")
                 var moji = require('kuromoji');
-                var kekka = message.content.split(" ");
-                if (message.content.slice(2).match(/　/)) {
-                    var kekka = message.content.split("　");
-                }
+                var kekka = message.content.slice(3)
                 var builder = moji.builder({
                     dicPath: 'node_modules/kuromoji/dict'
                 });
@@ -2401,7 +2332,7 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
                     if (err) {
                         throw err;
                     }
-                    var tokens = tokenizer.tokenize(kekka[1]);
+                    var tokens = tokenizer.tokenize(kekka);
                     console.dir(tokens);
                     var result = [];
                     for (var i = 0; i < tokens.length; i++) {
@@ -9152,6 +9083,70 @@ $help [コマンド] と打てば、特定のコマンドについてのヘル�
                         message.channel.send("その行動はとれないわよっ");
                         return;
                     });
+            }
+          if (message.content.includes('分')) {
+              var hun = message.content.slice(1,2);
+              if (message.content.slice(3,4).match("分")) {
+                var hun = message.content.slice(1,3);
+              }else if (message.content.slice(4,5).match("分")) {
+                var hun = message.content.slice(1,4);
+              }else if (message.content.slice(5,6).match("分")) {
+                var hun = message.content.slice(1,5);
+              }else if (message.content.slice(6,).match("分")) {
+                message.channel.send("そこまで大きいなら、「$〇時間」にしたらどう？")
+              }
+                message.channel.send('仕方ないわね。'+hun+'分くらい数えてあげるわ');
+                message.react('🕐');
+                function sleep(waitSec, callbackFunc) {
+                    var spanedSec = 0;
+                    var id = setInterval(function () {
+                        spanedSec++;
+                        if (spanedSec >= waitSec) {
+                            clearInterval(id);
+                            if (callbackFunc) callbackFunc();
+                        }
+                    }, 1000);
+                }
+                sleep(Number(hun*30), function () {
+                    message.channel.send('あと' + (hun*30) + '秒で'+hun+'分よ！！');
+                    sleep(Number(hun*30), function () {
+                        message.reply(hun+'分たったわよ！！');
+                        return;
+                    });
+                });
+                return
+            }
+            if (message.content.includes('時間')) {
+              var hun = message.content.slice(1,2);
+              if (message.content.slice(3,4).match("時")) {
+                var hun = message.content.slice(1,3);
+              }else if (message.content.slice(4,5).match("時")) {
+                var hun = message.content.slice(1,4);
+              }else if (message.content.slice(5,6).match("時")) {
+                var hun = message.content.slice(1,5);
+              }else if (message.content.slice(6,).match("時")) {
+                message.channel.send("そこまで大きい時間、覚えられないわよ！わ、悪かったわね！")
+              }
+                message.channel.send('仕方ないわね。'+hun+'時間くらい数えてあげるわ');
+                message.react('🕐');
+                function sleep(waitSec, callbackFunc) {
+                    var spanedSec = 0;
+                    var id = setInterval(function () {
+                        spanedSec++;
+                        if (spanedSec >= waitSec) {
+                            clearInterval(id);
+                            if (callbackFunc) callbackFunc();
+                        }
+                    }, 60000);//１分
+                }
+                sleep(Number(hun*30), function () {
+                    message.channel.send('あと' + (hun*30) + '分で'+hun+'時間よ！！');
+                    sleep(Number(hun*30), function () {
+                        message.reply(hun+'時間たったわよ！！');
+                        return;
+                    });
+                });
+                return
             }
             //〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜003712944882789746315:qy5yt1vw_wq
             var tosi = message.content.indexOf('年'); //https://cse.google.com/cse?cx=003712944882789746315:qy5yt1vw_wq
