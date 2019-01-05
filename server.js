@@ -509,7 +509,7 @@ $help [コマンド] と打てば、特定のコマンドについてのヘル�
                 .addField('面白', "`じゃんけん`、`くじ`、`問題`、`サイコロ`、`語尾`、`ランダム`、`スピカの確率`、`密会`、`暗号`、`R18`、`心情`　、目下製作中→`まるばつ`、`しりとり`、`脳トレ`")
                 .addField('管理', "`検索`、`リンク`、`ログ`、`ピン`、`絵文字`、`役職`、`help`")
                 .addField('⬇️入っているサーバー合計⬇️', i)
-                .addField(`スピカを招待したい場合、上のタイトルをクリックしてください。`, `その他質問・要望等がある場合、「**スピカhelp**」というチャンネルを作ると質問・要望を送信することができます。`)
+                .addField(`スピカを招待したい場合、上のタイトルをクリックしてください。`, `その他質問・要望等がある場合、「**スピカinfo**」というチャンネルを作ると質問・要望を送信することができます。`)
                 .setURL(`https://discordapp.com/api/oauth2/authorize?client_id=469474420050886657&permissions=1077275840&scope=bot`)
                 .setColor('#00ffca')
                 .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/ffaff4f5603ef14dc98fb492baabb34c.png?size=2048")
@@ -2198,6 +2198,24 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
                     });
                 });
             }
+          if (message.content.includes('gram')) {//何がしたいん？
+                var kekka = message.content.split(" ");
+                if (message.content.slice(5).match(/　/)) {
+                    var kekka = message.content.split("　");
+                }
+                var ngram = function (words, n) {
+                    var i;
+                    var grams = [];
+
+                    for (i = 0; i <= words.length - n; i++) {
+                        grams.push(words.substr(i, n).toLowerCase());
+                    }
+                    return grams;
+                }
+                var text = kekka[1];
+                message.channel.send(ngram(text, 3))
+            return;
+            }
             if (message.content.includes('強制終了')) {
                 if (!message.member.permissions.has("ADMINISTRATOR")) return;
                 client.me.destroy()
@@ -2779,23 +2797,6 @@ ${tokens[i].conjugated_form}\n`)
                     .then(response)
                     .catch(logError);
                 return;
-            }
-            if (message.content.includes('gram')) {
-                var kekka = message.content.split(" ");
-                if (message.content.slice(5).match(/　/)) {
-                    var kekka = message.content.split("　");
-                }
-                var ngram = function (words, n) {
-                    var i;
-                    var grams = [];
-
-                    for (i = 0; i <= words.length - n; i++) {
-                        grams.push(words.substr(i, n).toLowerCase());
-                    }
-                    return grams;
-                }
-                var text = kekka[1];
-                message.channel.send(ngram(text, 3))
             }
             if (message.content.includes('チノ')) {
                 message.react(client.emojis.find(emoji => emoji.name === "tino"))
@@ -9094,7 +9095,7 @@ $help [コマンド] と打てば、特定のコマンドについてのヘル�
                 .addField('面白', "`じゃんけん`、`くじ`、`問題`、`サイコロ`、`語尾`、`ランダム`、`スピカの確率`、`密会`、`暗号`、`R18`、`心情`　、目下製作中→`まるばつ`、`しりとり`、`脳トレ`")
                 .addField('管理', "`検索`、`リンク`、`ログ`、`ピン`、`絵文字`、`役職`、`help`")
                 .addField('⬇️入っているサーバー合計⬇️', i)
-                .addField(`スピカを招待したい場合、上のタイトルをクリックしてください。`, `その他質問・要望等がある場合、「**スピカhelp**」というチャンネルを作ると質問・要望を送信することができます。`)
+                .addField(`スピカを招待したい場合、上のタイトルをクリックしてください。`, `その他質問・要望等がある場合、「**スピカinfo**」というチャンネルを作ると質問・要望を送信することができます。`)
                 .setURL(`https://discordapp.com/api/oauth2/authorize?client_id=469474420050886657&permissions=1077275840&scope=bot`)
                 .setColor('#00ffca')
                 .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/ffaff4f5603ef14dc98fb492baabb34c.png?size=2048")
