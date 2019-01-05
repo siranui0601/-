@@ -607,10 +607,41 @@ function runCommand(client, message) {
                 message.channel.send(responce[global.randomInt(responce.length)]);
                 return;
             }
-
             if (command.includes('って呼んで')) {
                 var nameToCall = command.slice(0, command.indexOf('って呼んで')).trim().split(/[ 、]+/g);
                 howToCall(client, message, nameToCall);
+                return;
+            }
+                      if (message.content.includes('検索')) {
+                var kens = (message.content.slice(3));
+                if (message.content.slice(3, 4).match(/[ 　]/)) {
+                    var kens = (message.content.slice(4));
+                }
+                var fs = require('fs');
+
+                fs.readFile('./server.js', 'utf8', function (err, text) {
+                    const lines = text.split('\n') // 行ごとの配列
+                    const line2 = text.split('\n').length;
+
+                    const index = lines.findIndex(line => ~line.indexOf(kens)) // どの行にあるか検索
+                    const result = ~index ? (index + 1) + '' : 'なかったわよ！'
+                    const index2 = lines.findIndex(line => ~line.indexOf(kens, result + 1))
+                    const result2 = ~index2 ? (index2 + 1) + '' : 'なかったわよ！'
+                    const index3 = lines.findIndex(line => ~line.indexOf(kens, result2 + 1))
+                    const result3 = ~index2 ? (index3 + 1) + '' : 'なかったわよ！'
+                    var nang = text.indexOf(kens) + 1
+                    var count = 0;
+                    var pos = text.indexOf(kens);
+                    while (pos !== -1) {
+                        count++;
+                        pos = text.indexOf(kens, pos + 1);
+                    }
+                    if (result == 'なかったわよ！') {
+                        message.channel.send('なかったわよ！')
+                        return;
+                    }
+                    message.channel.send(result + "/" + line2 + "行目（" + nang + `番目）にあったわ！` + `\n全部で` + count + `個あったわ`);
+                });
                 return;
             }
             if (message.content.substring(1).startsWith('help 時間')) { //embed.setDescription('');
@@ -1060,7 +1091,7 @@ or
                 let embed = new discord.RichEmbed()
                     .setTitle(`スピカのヘルプよっ！`)
                     .setDescription(`＜冒頭に$を忘れずに！＞`)
-                    .addField('何時/何月/何日/時間', ` 󠂪󠂪󠂪`)
+                    .addField('何時/何月/何日', ` 󠂪󠂪󠂪`)
                     .addField(`「$何時」等と打つと、`, `〇年の、△月☆日、□時◇分だよっ
 時計くらい読めるんだから。バカにしないでよね`)
                     .addField(`と言います。
@@ -1091,8 +1122,8 @@ or
                     .setTitle(`スピカのヘルプよっ！`)
                     .setDescription(`＜冒頭に$を忘れずに！＞`)
                     .addField('タイマー', ` 󠂪󠂪󠂪`)
-                    .addField(`「$〇分タイマー」と打つと、`, `〇は1〜10の数字`)
-                    .addField(`そのタイマーをセットします。`, ` 󠂪󠂪󠂪`)
+                    .addField(`「$〇[分/時間/秒]」と打つと、`, `〇は半角数字`)
+                    .addField(`そのタイマーをセットします。`, "スピカの機能追加の都合上、タイマーがリセットされてしまう可能性があります。あらかじめご了承ください。")
                     .setColor('#00ffca')
                     .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/506888ebbfe90c0ba460d9fff1d7ff63.png?size=2048")
                     .setFooter('実行時刻：' + (year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分`)
@@ -2004,17 +2035,6 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
 時計くらい読めるんだから。バカにしないでよね`);
                 return;
             }
-            if (message.content.includes('時間')) {
-                var now = new Date();
-                var year = now.getFullYear();
-                var month = now.getMonth();
-                var date = now.getDate();
-                var hour = now.getHours();
-                var min = now.getMinutes();
-                message.channel.send((year) + "年の、" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分だよっ
-時計くらい読めるんだから。バカにしないでよね`);
-                return;
-            }
             if (message.content.includes('何月')) {
                 var now = new Date();
                 var year = now.getFullYear();
@@ -2066,11 +2086,19 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
             }
 
 
-
-            if (message.content.includes(1 + '分')) {
-                message.channel.send('仕方ないわね。1分くらい数えてあげるわ');
+            if (message.content.includes('分')) {
+              var hun = message.content.slice(1,2);
+              if (message.content.slice(3,4).match("分")) {
+                var hun = message.content.slice(1,3);
+              }else if (message.content.slice(4,5).match("分")) {
+                var hun = message.content.slice(1,4);
+              }else if (message.content.slice(5,6).match("分")) {
+                var hun = message.content.slice(1,5);
+              }else if (message.content.slice(6,).match("分")) {
+                message.channel.send("そこまで大きいなら、「$〇時間」にしたらどう？")
+              }
+                message.channel.send('仕方ないわね。'+hun+'分くらい数えてあげるわ');
                 message.react('🕐');
-
                 function sleep(waitSec, callbackFunc) {
                     var spanedSec = 0;
                     var id = setInterval(function () {
@@ -2081,18 +2109,28 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
                         }
                     }, 1000);
                 }
-                sleep(30, function () {
-                    message.channel.send('あと' + 30 + '秒よ');
-                    sleep(30, function () {
-                        message.reply('1分たったわよ');
+                sleep(Number(hun*30), function () {
+                    message.channel.send('あと' + (hun*30) + '秒で'+hun+'分よ！！');
+                    sleep(Number(hun*30), function () {
+                        message.reply(hun+'分たったわよ！！');
                         return;
                     });
                 });
+                return
             }
-            if (message.content.includes(2 + '分')) {
-                message.channel.send('仕方ないわね。2分くらい数えてあげるわ');
+            if (message.content.includes('時間')) {
+              var hun = message.content.slice(1,2);
+              if (message.content.slice(3,4).match("時")) {
+                var hun = message.content.slice(1,3);
+              }else if (message.content.slice(4,5).match("時")) {
+                var hun = message.content.slice(1,4);
+              }else if (message.content.slice(5,6).match("時")) {
+                var hun = message.content.slice(1,5);
+              }else if (message.content.slice(6,).match("時")) {
+                message.channel.send("そこまで大きい時間、覚えられないわよ！わ、悪かったわね！")
+              }
+                message.channel.send('仕方ないわね。'+hun+'時間くらい数えてあげるわ');
                 message.react('🕐');
-
                 function sleep(waitSec, callbackFunc) {
                     var spanedSec = 0;
                     var id = setInterval(function () {
@@ -2101,218 +2139,16 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
                             clearInterval(id);
                             if (callbackFunc) callbackFunc();
                         }
-                    }, 1000);
+                    }, 60000);//１分
                 }
-                sleep(60, function () {
-                    message.channel.send('あと' + 1 + '分よ');
-                    sleep(90, function () {
-                        message.channel.send('あと30秒よ');
-                        sleep(30, function () {
-                            message.reply('2分たったわよ');
-                            return;
-                        });
-                    });
-                })
-            }
-            if (message.content.includes(3 + '分')) {
-                message.channel.send('仕方ないわね。3分くらい数えてあげるわ');
-                message.react('🕐');
-
-                function sleep(waitSec, callbackFunc) {
-                    var spanedSec = 0;
-                    var id = setInterval(function () {
-                        spanedSec++;
-                        if (spanedSec >= waitSec) {
-                            clearInterval(id);
-                            if (callbackFunc) callbackFunc();
-                        }
-                    }, 1000);
-                }
-                sleep(90, function () {
-                    message.channel.send('あと1分30秒よ');
-                    sleep(150, function () {
-                        message.channel.send('あと30秒よ');
-                        sleep(30, function () {
-                            message.reply('3分たったわよ');
-                            return;
-                        });
+                sleep(Number(hun*30), function () {
+                    message.channel.send('あと' + (hun*30) + '分で'+hun+'時間よ！！');
+                    sleep(Number(hun*30), function () {
+                        message.reply(hun+'時間たったわよ！！');
+                        return;
                     });
                 });
-            }
-            if (message.content.includes(4 + '分')) {
-                message.channel.send('仕方ないわね。4分くらい数えてあげるわ');
-                message.react('🕐');
-
-                function sleep(waitSec, callbackFunc) {
-                    var spanedSec = 0;
-                    var id = setInterval(function () {
-                        spanedSec++;
-                        if (spanedSec >= waitSec) {
-                            clearInterval(id);
-                            if (callbackFunc) callbackFunc();
-                        }
-                    }, 1000);
-                }
-                sleep(120, function () {
-                    message.channel.send('あと' + 2 + '分よ');
-                    sleep(210, function () {
-                        message.channel.send('あと30秒よ');
-                        sleep(30, function () {
-                            message.reply('4分たったわよ');
-                            return;
-                        });
-                    });
-                });
-            }
-            if (message.content.includes(5 + '分')) {
-                message.channel.send('仕方ないわね。5分くらい数えてあげるわ');
-                message.react('🕐');
-
-                function sleep(waitSec, callbackFunc) {
-                    var spanedSec = 0;
-                    var id = setInterval(function () {
-                        spanedSec++;
-                        if (spanedSec >= waitSec) {
-                            clearInterval(id);
-                            if (callbackFunc) callbackFunc();
-                        }
-                    }, 1000);
-                }
-                sleep(150, function () {
-                    message.channel.send('あと2分30秒よ');
-                    sleep(270, function () {
-                        message.channel.send('あと30秒よ');
-                        sleep(30, function () {
-                            message.reply('5分たったわよ');
-                            return;
-                        });
-                    });
-                });
-            }
-            if (message.content.includes(6 + '分')) {
-                message.channel.send('仕方ないわね。6分くらい数えてあげるわ');
-                message.react('🕐');
-
-                function sleep(waitSec, callbackFunc) {
-                    var spanedSec = 0;
-                    var id = setInterval(function () {
-                        spanedSec++;
-                        if (spanedSec >= waitSec) {
-                            clearInterval(id);
-                            if (callbackFunc) callbackFunc();
-                        }
-                    }, 1000);
-                }
-                sleep(180, function () {
-                    message.channel.send('あと3分よ');
-                    sleep(330, function () {
-                        message.channel.send('あと30秒よ');
-                        sleep(30, function () {
-                            message.reply('6分たったわよ');
-                            return;
-                        });
-                    });
-                });
-            }
-            if (message.content.includes(7 + '分')) {
-                message.channel.send('仕方ないわね。7分くらい数えてあげるわ');
-                message.react('🕐');
-
-                function sleep(waitSec, callbackFunc) {
-                    var spanedSec = 0;
-                    var id = setInterval(function () {
-                        spanedSec++;
-                        if (spanedSec >= waitSec) {
-                            clearInterval(id);
-                            if (callbackFunc) callbackFunc();
-                        }
-                    }, 1000);
-                }
-                sleep(210, function () {
-                    message.channel.send('あと3分30秒よ');
-                    sleep(390, function () {
-                        message.channel.send('あと30秒よ');
-                        sleep(30, function () {
-                            message.reply('7分たったわよ');
-                            return;
-                        });
-                    });
-                });
-            }
-            if (message.content.includes(8 + '分')) {
-                message.channel.send('仕方ないわね。8分くらい数えてあげるわ');
-                message.react('🕐');
-
-                function sleep(waitSec, callbackFunc) {
-                    var spanedSec = 0;
-                    var id = setInterval(function () {
-                        spanedSec++;
-                        if (spanedSec >= waitSec) {
-                            clearInterval(id);
-                            if (callbackFunc) callbackFunc();
-                        }
-                    }, 1000);
-                }
-                sleep(240, function () {
-                    message.channel.send('あと4分よ');
-                    sleep(450, function () {
-                        message.channel.send('あと30秒よ');
-                        sleep(30, function () {
-                            message.reply('8分たったわよ');
-                            return;
-                        });
-                    });
-                });
-            }
-            if (message.content.includes(9 + '分')) {
-                message.channel.send('仕方ないわね。9分くらい数えてあげるわ');
-                message.react('🕐');
-
-                function sleep(waitSec, callbackFunc) {
-                    var spanedSec = 0;
-                    var id = setInterval(function () {
-                        spanedSec++;
-                        if (spanedSec >= waitSec) {
-                            clearInterval(id);
-                            if (callbackFunc) callbackFunc();
-                        }
-                    }, 1000);
-                }
-                sleep(270, function () {
-                    message.channel.send('あと4分30秒よ');
-                    sleep(240, function () {
-                        message.channel.send('あと4分30秒よ');
-                        sleep(30, function () {
-                            message.reply('9分たったわよ');
-                            return;
-                        });
-                    });
-                });
-            }
-            if (message.content.includes(10 + '分')) {
-                message.channel.send('仕方ないわね。10分くらい数えてあげるわ');
-                message.react('🕐');
-
-                function sleep(waitSec, callbackFunc) {
-                    var spanedSec = 0;
-                    var id = setInterval(function () {
-                        spanedSec++;
-                        if (spanedSec >= waitSec) {
-                            clearInterval(id);
-                            if (callbackFunc) callbackFunc();
-                        }
-                    }, 1000);
-                }
-                sleep(300, function () {
-                    message.channel.send('あと5分よ');
-                    sleep(270, function () { // => 270
-                        message.channel.send('あと30秒よ');
-                        sleep(30, function () { // => 30
-                            message.reply('10分たったわよ');
-                            return;
-                        });
-                    });
-                });
+                return
             }
             if (message.content.includes('眠るな')) {
                 message.channel.send('私が寝落ちしないように、対策をつけたわ。12時間有効よ。');
@@ -2387,6 +2223,41 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
                 })
                 return;
             }
+          if (message.content.includes('鯖絵文字')) {
+                const emojis = message.guild.emojis.map(e => `<:${e.name}:${e.id}>`);
+                var now = new Date();
+                var now = new Date();
+                var year = now.getFullYear();
+                var month = now.getMonth();
+                var date = now.getDate();
+                var hour = now.getHours();
+                var min = now.getMinutes()
+                let embed = new discord.RichEmbed()
+                    .setTitle(`このサーバーの絵文字は`)
+                    .setDescription(emojis)
+                    .addField("よ！", "󠂪󠂪 󠂪󠂪󠂪󠂪 󠂪󠂪󠂪󠂪 󠂪󠂪")
+                    .setColor('#00ffca')
+                    .setFooter('実行時刻：' + (year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分`)
+                    .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/506888ebbfe90c0ba460d9fff1d7ff63.png?size=2048")
+                message.channel.send(embed)
+                return;
+            }
+            if (message.content.includes('絵文字')) { //.slice
+                var emo = message.content.substr(4);
+                var emo2 = message.content.slice(7, -1);
+                if (message.content.slice(-1).match("字")) {
+                    message.channel.send("絵文字 [何かしらの絵文字]\nって感じで使いなさいよね！")
+                    return;
+                }
+                if (!message.content.slice(0).match(/:/)) {
+                    message.channel.send("`" + emo + "`" + `
+普通の絵文字だから、IDはないわね`)
+                    return;
+                }
+                message.channel.send(emo2 + `
+よ！`);
+                return;
+            }
             if (message.content.includes('口調')) {
                 var kekka = message.content.split(" ");
                 if (message.content.slice(2).match(/　/)) {
@@ -2442,38 +2313,6 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
                 message.channel.send("「__" + b.toString() + `__」\nよっ`);
                 message.channel.send("その暗号文は5秒後に消去されます")
                 message.delete(5000)
-            }
-            if (message.content.includes('検索')) {
-                var kens = (message.content.slice(3));
-                if (message.content.slice(3, 4).match(/[ 　]/)) {
-                    var kens = (message.content.slice(4));
-                }
-                var fs = require('fs');
-
-                fs.readFile('./server.js', 'utf8', function (err, text) {
-                    const lines = text.split('\n') // 行ごとの配列
-                    const line2 = text.split('\n').length;
-
-                    const index = lines.findIndex(line => ~line.indexOf(kens)) // どの行にあるか検索
-                    const result = ~index ? (index + 1) + '' : 'なかったわよ！'
-                    const index2 = lines.findIndex(line => ~line.indexOf(kens, result + 1))
-                    const result2 = ~index2 ? (index2 + 1) + '' : 'なかったわよ！'
-                    const index3 = lines.findIndex(line => ~line.indexOf(kens, result2 + 1))
-                    const result3 = ~index2 ? (index3 + 1) + '' : 'なかったわよ！'
-                    var nang = text.indexOf(kens) + 1
-                    var count = 0;
-                    var pos = text.indexOf(kens);
-                    while (pos !== -1) {
-                        count++;
-                        pos = text.indexOf(kens, pos + 1);
-                    }
-                    if (result == 'なかったわよ！') {
-                        message.channel.send('なかったわよ！')
-                        return;
-                    }
-                    message.channel.send(result + "/" + line2 + "行目（" + nang + `番目）にあったわ！` + `\n全部で` + count + `個あったわ`);
-                });
-                return;
             }
             if (message.content.includes('追加')) {
                 var fs = require('fs');
@@ -3028,41 +2867,6 @@ ${tokens[i].conjugated_form}\n`)
                     .setFooter('実行時刻：' + (year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分`)
                     .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/506888ebbfe90c0ba460d9fff1d7ff63.png?size=2048")
                 message.channel.send(embed)
-                return;
-            }
-            if (message.content.includes('鯖絵文字')) {
-                const emojis = message.guild.emojis.map(e => `<:${e.name}:${e.id}>`);
-                var now = new Date();
-                var now = new Date();
-                var year = now.getFullYear();
-                var month = now.getMonth();
-                var date = now.getDate();
-                var hour = now.getHours();
-                var min = now.getMinutes()
-                let embed = new discord.RichEmbed()
-                    .setTitle(`このサーバーの絵文字は`)
-                    .setDescription(emojis)
-                    .addField("よ！", "󠂪󠂪 󠂪󠂪󠂪󠂪 󠂪󠂪󠂪󠂪 󠂪󠂪")
-                    .setColor('#00ffca')
-                    .setFooter('実行時刻：' + (year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分`)
-                    .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/506888ebbfe90c0ba460d9fff1d7ff63.png?size=2048")
-                message.channel.send(embed)
-                return;
-            }
-            if (message.content.includes('絵文字')) { //.slice
-                var emo = message.content.substr(4);
-                var emo2 = message.content.slice(7, -1);
-                if (message.content.slice(-1).match("字")) {
-                    message.channel.send("絵文字 [何かしらの絵文字]\nって感じで使いなさいよね！")
-                    return;
-                }
-                if (!message.content.slice(0).match(/:/)) {
-                    message.channel.send("`" + emo + "`" + `
-普通の絵文字だから、IDはないわね`)
-                    return;
-                }
-                message.channel.send(emo2 + `
-よ！`);
                 return;
             }
             if (message.content.includes('三角')) { //$三角 ８ ５ 7
