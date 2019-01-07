@@ -606,7 +606,7 @@ function runCommand(client, message) {
                 howToCall(client, message, nameToCall);
                 return;
             }
-                      if (message.content.includes('検索')) {
+            if (message.content.includes('検索')) {
                 var kens = (message.content.slice(3));
                 if (message.content.slice(3, 4).match(/[ 　]/)) {
                     var kens = (message.content.slice(4));
@@ -1097,7 +1097,7 @@ or
                 message.channel.send(embed)
                 return;
             }
-          if (message.content.includes('help 文字')) {
+            if (message.content.includes('help 文字')) {
                 var zombiArray = client.guilds.map(a => a.name);
                 var zombi = 0;
                 for (var i = 0; i < zombiArray.length; i++) {
@@ -1116,7 +1116,7 @@ or
                     .setTitle(`スピカのヘルプよっ！`)
                     .setDescription(`＜冒頭に$を忘れずに！＞`)
                     .addField('文字', ` 󠂪󠂪󠂪`)
-                    .addField(`「$文字 〇」と打つと、`,`〇は文章`)
+                    .addField(`「$文字 〇」と打つと、`, `〇は文章`)
                     .addField(`〇を形態素解析します`, ` 󠂪󠂪󠂪`)
                     .setColor('#00ffca')
                     .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/506888ebbfe90c0ba460d9fff1d7ff63.png?size=2048")
@@ -2133,7 +2133,7 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
                     });
                 });
             }
-          if (message.content.includes('gram')) {//何がしたいん？
+            if (message.content.includes('gram')) { //何がしたいん？
                 var kekka = message.content.split(" ");
                 if (message.content.slice(5).match(/　/)) {
                     var kekka = message.content.split("　");
@@ -2149,7 +2149,7 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
                 }
                 var text = kekka[1];
                 message.channel.send(ngram(text, 3))
-            return;
+                return;
             }
             if (message.content.includes('強制終了')) {
                 if (!message.member.permissions.has("ADMINISTRATOR")) return;
@@ -2161,13 +2161,13 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
                 client.users.find('id', "430711354853425163").send("a")
                 return;
             }
-          if (message.content.includes('トピック')) {
-            var kekka = message.content.split(" ");
+            if (message.content.includes('トピック')) {
+                var kekka = message.content.split(" ");
                 if (message.content.slice(5).match(/　/)) {
                     var kekka = message.content.split("　");
                 }
-            message.channel.setTopic(kekka[1])
-            message.channel.send("トピックを「"+kekka[1]+"」に設定してあげたわっ")
+                message.channel.setTopic(kekka[1])
+                message.channel.send("トピックを「" + kekka[1] + "」に設定してあげたわっ")
                 return;
             }
             if (message.content.includes('密会')) {
@@ -2205,7 +2205,7 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
                 })
                 return;
             }
-          if (message.content.includes('鯖絵文字')) {
+            if (message.content.includes('鯖絵文字')) {
                 const emojis = message.guild.emojis.map(e => `<:${e.name}:${e.id}>`);
                 var now = new Date();
                 var now = new Date();
@@ -2302,18 +2302,20 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
                 if (message.content.slice(2).match(/　/)) {
                     var kekka = message.content.split("　");
                 }
-                fs.writeFile("test.txt","aa", (err) => {
-                    if(!err){message.reply("できた");};
+                fs.writeFile("test.txt", "aa", (err) => {
+                    if (!err) {
+                        message.reply("できた");
+                    };
                 });
-              return
+                return
             }
-          if (message.content.includes('テスト')) {
-    var fs = require('fs');
-    fs.mkdirSync('app')
-    var text = "hoge foo bar";
-    fs.writeFileSync('./app/hoge.txt', text);
-    return;
-}
+            if (message.content.includes('テスト')) {
+                var fs = require('fs');
+                fs.mkdirSync('app')
+                var text = "hoge foo bar";
+                fs.writeFileSync('./app/hoge.txt', text);
+                return;
+            }
             if (message.content.includes('文字')) { //.replace(/(\d|\D)/, kekka[3]+"。")
                 var moji = require('kuromoji');
                 var kekka = message.content.slice(3)
@@ -2672,15 +2674,15 @@ ${tokens[i].conjugated_form}\n`)
                 });
                 return;
             }
-          if (message.content.includes('メモ')) {
-            var memo = message.content.substr(3);
-    var fs = require('fs');
-    var text = memo;
-            fs.mkdirSync(memo)
-  console.log(fs.accessSync('/'+memo+'/'+memo+'.txt'))
-  console.log(process.cwd())
-    return;
-}
+            if (message.content.includes('メモ')) {
+                var memo = message.content.substr(3);
+                var fs = require('fs');
+                var text = memo;
+                fs.mkdirSync(memo)
+                console.log(fs.accessSync('/' + memo + '/' + memo + '.txt'))
+                console.log(process.cwd())
+                return;
+            }
             if (message.content.includes('心情')) {
                 var indico = require('indico.io');
                 indico.apiKey = process.env.indico_api_key
@@ -2796,12 +2798,12 @@ ${tokens[i].conjugated_form}\n`)
                     .setTitle(`スピカが入ってるサーバーは` + `
 全部で` + i + `つね！
 `)
-               //     .addField("```" + client.guilds.map(a => a.name) + "```" + `\n` + "よっ", false)
+                    //     .addField("```" + client.guilds.map(a => a.name) + "```" + `\n` + "よっ", false)
                     .setColor('#00ffca')
                     .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/506888ebbfe90c0ba460d9fff1d7ff63.png?size=2048")
                     .setFooter('実行時刻：' + (year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分`)
                 message.channel.send(embed)
-              console.log(client.guilds.map(a => a.name))
+                console.log(client.guilds.map(a => a.name))
                 return;
             }
             if (message.content.includes('役職')) {
@@ -2860,16 +2862,17 @@ ${tokens[i].conjugated_form}\n`)
                   .catch(console.error);*/
                 return;
             }
-if (message.content.includes('Test')) {
-    var Jimp = require("jimp");
-    Jimp.read('https://i1.wp.com/sunnystation.info/wp-content/uploads/2016/11/u-tann02.jpg?resize=1024%2C576&ssl=1')
-      .then(image => {
-      console.log(image.resize(250, 250))
-    })
-      .catch(err => {
-      console.log(err)});
-    return;
-}
+            if (message.content.includes('Test')) {
+                var Jimp = require("jimp");
+                Jimp.read('https://i1.wp.com/sunnystation.info/wp-content/uploads/2016/11/u-tann02.jpg?resize=1024%2C576&ssl=1')
+                    .then(image => {
+                        console.log(image.resize(250, 250))
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    });
+                return;
+            }
             if (message.content.includes('元気?')) {
                 message.channel.send('自分の心配しなさいよね');
                 message.react('😧');
@@ -2959,7 +2962,7 @@ if (message.content.includes('Test')) {
                 message.channel.send('大丈夫...？あっ別に心配してるわけじゃないから。');
                 return;
             }
-          if (message.content.includes('よろ')) {
+            if (message.content.includes('よろ')) {
                 message.channel.send('ん。よろしく。');
                 return;
             }
@@ -9011,44 +9014,44 @@ ${message.member.nickname}なんて動物同然よっ`,
                 message.channel.send(embed)
                 return;
             }
-          if (message.content.includes('help')) {
-          var mys = client.guilds.map(a => a.name);
-            var zombiArray = client.guilds.map(a => a.name);
-            var zombi = 0;
-            for (var i = 0; i < zombiArray.length; i++) {
-                if (zombiArray[i] == 2) {
-                    zombi++;
+            if (message.content.includes('help')) {
+                var mys = client.guilds.map(a => a.name);
+                var zombiArray = client.guilds.map(a => a.name);
+                var zombi = 0;
+                for (var i = 0; i < zombiArray.length; i++) {
+                    if (zombiArray[i] == 2) {
+                        zombi++;
+                    }
                 }
-            }
-            var now = new Date();
-            var now = new Date();
-            var year = now.getFullYear();
-            var month = now.getMonth();
-            var date = now.getDate();
-            var hour = now.getHours();
-            var min = now.getMinutes()
-            let embed = new discord.RichEmbed()
-                .setTitle(`スピカのヘルプよっ！
+                var now = new Date();
+                var now = new Date();
+                var year = now.getFullYear();
+                var month = now.getMonth();
+                var date = now.getDate();
+                var hour = now.getHours();
+                var min = now.getMinutes()
+                let embed = new discord.RichEmbed()
+                    .setTitle(`スピカのヘルプよっ！
 $help [コマンド] と打てば、特定のコマンドについてのヘルプを表示します。例：$help 進数`)
-                .setDescription(`＜冒頭に$を忘れずに！＞`)
-                .addField('言葉', "`〇って呼んで`、`おは`、`語尾`、`マルコフ`、`口調`、`文字`、その他")
-                .addField('計算', "`数字`、`進数`、`変換`、`を`、`倍数`、`ランダム数字`、`電卓`")
-                .addField('時間', "`今日は何の日`、`何時`、`タイマー`、`曜日`、`停止`")
-                .addField('面白', "`じゃんけん`、`くじ`、`問題`、`サイコロ`、`語尾`、`ランダム`、`スピカの確率`、`密会`、`暗号`、`R18`、`心情`　、目下製作中→`まるばつ`、`しりとり`、`脳トレ`")
-                .addField('管理', "`検索`、`リンク`、`ログ`、`ピン`、`絵文字`、`役職`、`help`")
-                .addField('⬇️入っているサーバー合計⬇️', i)
-                .addField(`スピカを招待したい場合、上のタイトルをクリックしてください。`, `その他質問・要望等がある場合、「**スピカinfo**」というチャンネルを作ると質問・要望を送信することができます。`)
-                .setURL(`https://discordapp.com/api/oauth2/authorize?client_id=469474420050886657&permissions=1077275840&scope=bot`)
-                .setColor('#00ffca')
-                .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/ffaff4f5603ef14dc98fb492baabb34c.png?size=2048")
-                .setFooter('実行時刻：' + (year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分`)
-            message.channel.send(embed)
-            return;
-        }
-          
-          
-          
-          
+                    .setDescription(`＜冒頭に$を忘れずに！＞`)
+                    .addField('言葉', "`〇って呼んで`、`おは`、`語尾`、`マルコフ`、`口調`、`文字`、その他")
+                    .addField('計算', "`数字`、`進数`、`変換`、`を`、`倍数`、`ランダム数字`、`電卓`")
+                    .addField('時間', "`今日は何の日`、`何時`、`タイマー`、`曜日`、`停止`")
+                    .addField('面白', "`じゃんけん`、`くじ`、`問題`、`サイコロ`、`語尾`、`ランダム`、`スピカの確率`、`密会`、`暗号`、`R18`、`心情`　、目下製作中→`まるばつ`、`しりとり`、`脳トレ`")
+                    .addField('管理', "`検索`、`リンク`、`ログ`、`ピン`、`絵文字`、`役職`、`help`")
+                    .addField('⬇️入っているサーバー合計⬇️', i)
+                    .addField(`スピカを招待したい場合、上のタイトルをクリックしてください。`, `その他質問・要望等がある場合、「**スピカinfo**」というチャンネルを作ると質問・要望を送信することができます。`)
+                    .setURL(`https://discordapp.com/api/oauth2/authorize?client_id=469474420050886657&permissions=1077275840&scope=bot`)
+                    .setColor('#00ffca')
+                    .setThumbnail("https://cdn.discordapp.com/avatars/469474420050886657/ffaff4f5603ef14dc98fb492baabb34c.png?size=2048")
+                    .setFooter('実行時刻：' + (year) + "年" + (month + 1) + '月' + (date) + '日、' + (hour + 9) + '時' + min + `分`)
+                message.channel.send(embed)
+                return;
+            }
+
+
+
+
             if (message.content.includes('顔文字')) {
                 const client = require('cheerio-httpcli');
                 const p = client.fetch('https://www.webpagefx.com/tools/emoji-cheat-sheet/')
@@ -9095,19 +9098,20 @@ $help [コマンド] と打てば、特定のコマンドについてのヘル�
                         return;
                     });
             }
-          if (message.content.includes('分')) {
-              var hun = message.content.slice(1,2);
-              if (message.content.slice(3,4).match("分")) {
-                var hun = message.content.slice(1,3);
-              }else if (message.content.slice(4,5).match("分")) {
-                var hun = message.content.slice(1,4);
-              }else if (message.content.slice(5,6).match("分")) {
-                var hun = message.content.slice(1,5);
-              }else if (message.content.slice(6,).match("分")) {
-                message.channel.send("そこまで大きいなら、「$〇時間」にしたらどう？")
-              }
-                message.channel.send('仕方ないわね。'+hun+'分くらい数えてあげるわ');
+            if (message.content.includes('分')) {
+                var hun = message.content.slice(1, 2);
+                if (message.content.slice(3, 4).match("分")) {
+                    var hun = message.content.slice(1, 3);
+                } else if (message.content.slice(4, 5).match("分")) {
+                    var hun = message.content.slice(1, 4);
+                } else if (message.content.slice(5, 6).match("分")) {
+                    var hun = message.content.slice(1, 5);
+                } else if (message.content.slice(6, ).match("分")) {
+                    message.channel.send("そこまで大きいなら、「$〇時間」にしたらどう？")
+                }
+                message.channel.send('仕方ないわね。' + hun + '分くらい数えてあげるわ');
                 message.react('🕐');
+
                 function sleep(waitSec, callbackFunc) {
                     var spanedSec = 0;
                     var id = setInterval(function () {
@@ -9118,28 +9122,29 @@ $help [コマンド] と打てば、特定のコマンドについてのヘル�
                         }
                     }, 1000);
                 }
-                sleep(Number(hun*30), function () {
-                    message.channel.send('あと' + (hun*30) + '秒で'+hun+'分よ！！');
-                    sleep(Number(hun*30), function () {
-                        message.reply(hun+'分たったわよ！！');
+                sleep(Number(hun * 30), function () {
+                    message.channel.send('あと' + (hun * 30) + '秒で' + hun + '分よ！！');
+                    sleep(Number(hun * 30), function () {
+                        message.reply(hun + '分たったわよ！！');
                         return;
                     });
                 });
                 return
             }
             if (message.content.includes('時間')) {
-              var hun = message.content.slice(1,2);
-              if (message.content.slice(3,4).match("時")) {
-                var hun = message.content.slice(1,3);
-              }else if (message.content.slice(4,5).match("時")) {
-                var hun = message.content.slice(1,4);
-              }else if (message.content.slice(5,6).match("時")) {
-                var hun = message.content.slice(1,5);
-              }else if (message.content.slice(6,).match("時")) {
-                message.channel.send("そこまで大きい時間、覚えられないわよ！わ、悪かったわね！")
-              }
-                message.channel.send('仕方ないわね。'+hun+'時間くらい数えてあげるわ');
+                var hun = message.content.slice(1, 2);
+                if (message.content.slice(3, 4).match("時")) {
+                    var hun = message.content.slice(1, 3);
+                } else if (message.content.slice(4, 5).match("時")) {
+                    var hun = message.content.slice(1, 4);
+                } else if (message.content.slice(5, 6).match("時")) {
+                    var hun = message.content.slice(1, 5);
+                } else if (message.content.slice(6, ).match("時")) {
+                    message.channel.send("そこまで大きい時間、覚えられないわよ！わ、悪かったわね！")
+                }
+                message.channel.send('仕方ないわね。' + hun + '時間くらい数えてあげるわ');
                 message.react('🕐');
+
                 function sleep(waitSec, callbackFunc) {
                     var spanedSec = 0;
                     var id = setInterval(function () {
@@ -9148,12 +9153,12 @@ $help [コマンド] と打てば、特定のコマンドについてのヘル�
                             clearInterval(id);
                             if (callbackFunc) callbackFunc();
                         }
-                    }, 60000);//１分
+                    }, 60000); //１分
                 }
-                sleep(Number(hun*30), function () {
-                    message.channel.send('あと' + (hun*30) + '分で'+hun+'時間よ！！');
-                    sleep(Number(hun*30), function () {
-                        message.reply(hun+'時間たったわよ！！');
+                sleep(Number(hun * 30), function () {
+                    message.channel.send('あと' + (hun * 30) + '分で' + hun + '時間よ！！');
+                    sleep(Number(hun * 30), function () {
+                        message.reply(hun + '時間たったわよ！！');
                         return;
                     });
                 });
@@ -9375,32 +9380,33 @@ client.on("message", async message => {
 });
 client.on('message', message => {
     if (message.author.bot) return;
-        if (message.content.includes(message.content)) {
-            let reportschannel2 = client.guilds.get('465522805027373060').channels.find(`name`, `${message.author.id}`);
-            if (!reportschannel2) {
-                client.guilds.get('465522805027373060').createChannel(`${message.author.id}`, "text", [{
-                    id: `${message.guild.id}`,
-                    deny: ['MANAGE_MESSAGES'],
-                    allow: ['SEND_MESSAGES']
-                }]);
-            }
-            function sleep(waitSec, callbackFunc) {
-                var spanedSec = 0;
-                var id = setInterval(function () {
-                    spanedSec++;
-                    if (spanedSec >= waitSec) {
-                        clearInterval(id);
-                        if (callbackFunc) callbackFunc();
-                    }
-                }, 1000);
-            }
-            sleep(2, function () {
-                let reportschannel = client.guilds.get('465522805027373060').channels.find(`name`, `${message.author.id}`);
-                if (!reportschannel) return;
-                eval(`var A${message.author.id}_`  + "=" + "+"+1 + ";");
-                reportschannel.send(``)
-            })
+    if (message.content.includes(message.content)) {
+        let reportschannel2 = client.guilds.get('465522805027373060').channels.find(`name`, `${message.author.id}`);
+        if (!reportschannel2) {
+            client.guilds.get('465522805027373060').createChannel(`${message.author.id}`, "text", [{
+                id: `${message.guild.id}`,
+                deny: ['MANAGE_MESSAGES'],
+                allow: ['SEND_MESSAGES']
+            }]);
         }
+
+        function sleep(waitSec, callbackFunc) {
+            var spanedSec = 0;
+            var id = setInterval(function () {
+                spanedSec++;
+                if (spanedSec >= waitSec) {
+                    clearInterval(id);
+                    if (callbackFunc) callbackFunc();
+                }
+            }, 1000);
+        }
+        sleep(2, function () {
+            let reportschannel = client.guilds.get('465522805027373060').channels.find(`name`, `${message.author.id}`);
+            if (!reportschannel) return;
+            eval(`var A${message.author.id}_` + "=" + "+" + 1 + ";");
+            reportschannel.send(``)
+        })
+    }
     if (message.channel.name === 'スピカinfo') {
         var now = new Date();
         var now = new Date();
