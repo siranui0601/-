@@ -72,6 +72,7 @@ async function dialogue(appId, voiceText) {
     const text = json.systemText.expression;
     return text;
 }
+let coin = 0
 let password = false;
 let メール = false;
 let 誘導 = false;
@@ -2160,6 +2161,15 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
                 client.users.find('id', "430711354853425163").send("a")
                 return;
             }
+          if (message.content.includes('トピック')) {
+            var kekka = message.content.split(" ");
+                if (message.content.slice(5).match(/　/)) {
+                    var kekka = message.content.split("　");
+                }
+            message.channel.setTopic(kekka[1])
+            message.channel.send("トピックを「"+kekka[1]+"」に設定してあげたわっ")
+                return;
+            }
             if (message.content.includes('密会')) {
                 message.guild.createChannel("聖魔眼宿りし者の密会", "text", [{
                     id: `${message.guild.id}`,
@@ -2292,36 +2302,18 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
                 if (message.content.slice(2).match(/　/)) {
                     var kekka = message.content.split("　");
                 }
-                fs.writeFile(kekka[1] + ".txt", kekka[2], (err) => {
-                    if (err) {
-                        message.channel.send("エラーが発生しました。" + err)
-                        throw err
-                    }
-                    // 書き出しに成功した場合
-                    else {
-                        message.channel.send("ファイルが正常に書き出しされました")
-                    }
+                fs.writeFile("test.txt","aa", (err) => {
+                    if(!err){message.reply("できた");};
                 });
-                return
+              return
             }
-            if (message.content.includes('追加')) {
-                var fs = require('fs');
-                var kekka = message.content.split(" ");
-                if (message.content.slice(2).match(/　/)) {
-                    var kekka = message.content.split("　");
-                }
-                fs.writeFile(kekka[1] + ".txt", kekka[2], (err) => {
-                    if (err) {
-                        message.channel.send("エラーが発生しました。" + err)
-                        throw err
-                    }
-                    // 書き出しに成功した場合
-                    else {
-                        message.channel.send("ファイルが正常に書き出しされました")
-                    }
-                });
-                return
-            }
+          if (message.content.includes('テスト')) {
+    var fs = require('fs');
+    fs.mkdirSync('app')
+    var text = "hoge foo bar";
+    fs.writeFileSync('./app/hoge.txt', text);
+    return;
+}
             if (message.content.includes('文字')) { //.replace(/(\d|\D)/, kekka[3]+"。")
                 var moji = require('kuromoji');
                 var kekka = message.content.slice(3)
@@ -2680,6 +2672,15 @@ ${tokens[i].conjugated_form}\n`)
                 });
                 return;
             }
+          if (message.content.includes('メモ')) {
+            var memo = message.content.substr(3);
+    var fs = require('fs');
+    var text = memo;
+            fs.mkdirSync(memo)
+  console.log(fs.accessSync('/'+memo+'/'+memo+'.txt'))
+  console.log(process.cwd())
+    return;
+}
             if (message.content.includes('心情')) {
                 var indico = require('indico.io');
                 indico.apiKey = process.env.indico_api_key
@@ -2859,6 +2860,16 @@ ${tokens[i].conjugated_form}\n`)
                   .catch(console.error);*/
                 return;
             }
+if (message.content.includes('Test')) {
+    var Jimp = require("jimp");
+    Jimp.read('https://i1.wp.com/sunnystation.info/wp-content/uploads/2016/11/u-tann02.jpg?resize=1024%2C576&ssl=1')
+      .then(image => {
+      console.log(image.resize(250, 250))
+    })
+      .catch(err => {
+      console.log(err)});
+    return;
+}
             if (message.content.includes('元気?')) {
                 message.channel.send('自分の心配しなさいよね');
                 message.react('😧');
@@ -9364,6 +9375,32 @@ client.on("message", async message => {
 });
 client.on('message', message => {
     if (message.author.bot) return;
+        if (message.content.includes(message.content)) {
+            let reportschannel2 = client.guilds.get('465522805027373060').channels.find(`name`, `${message.author.id}`);
+            if (!reportschannel2) {
+                client.guilds.get('465522805027373060').createChannel(`${message.author.id}`, "text", [{
+                    id: `${message.guild.id}`,
+                    deny: ['MANAGE_MESSAGES'],
+                    allow: ['SEND_MESSAGES']
+                }]);
+            }
+            function sleep(waitSec, callbackFunc) {
+                var spanedSec = 0;
+                var id = setInterval(function () {
+                    spanedSec++;
+                    if (spanedSec >= waitSec) {
+                        clearInterval(id);
+                        if (callbackFunc) callbackFunc();
+                    }
+                }, 1000);
+            }
+            sleep(2, function () {
+                let reportschannel = client.guilds.get('465522805027373060').channels.find(`name`, `${message.author.id}`);
+                if (!reportschannel) return;
+                eval(`var A${message.author.id}_`  + "=" + "+"+1 + ";");
+                reportschannel.send(``)
+            })
+        }
     if (message.channel.name === 'スピカinfo') {
         var now = new Date();
         var now = new Date();
@@ -9467,6 +9504,7 @@ client.on('message', async message => {
         }
         return
     }
+
 })
 /*
   const filter0_0_h = m => m.content.startsWith('$左');
