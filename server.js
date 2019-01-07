@@ -485,6 +485,7 @@ client.on('ready', async message => {
             return;
         }
         if (message.isMemberMentioned(client.user)) {
+          
             var mys = client.guilds.map(a => a.name);
             var zombiArray = client.guilds.map(a => a.name);
             var zombi = 0;
@@ -2151,9 +2152,70 @@ $help等と打つと知れます。`, ` 󠂪󠂪󠂪`)
                 message.channel.send(ngram(text, 3))
                 return;
             }
-            if (message.content.includes('強制終了')) {
-                if (!message.member.permissions.has("ADMINISTRATOR")) return;
-                client.me.destroy()
+            if (message.content.includes('コイン')) {
+              let reportschannel = client.guilds.get('531727791968878592').channels.find(`name`, `${message.author.id}`);
+              if((`${message.author.id}`).slice(-1) === "1"){
+                 reportschannel = client.guilds.get('531728647392985099').channels.find(`name`, `${message.author.id}`);}
+              if((`${message.author.id}`).slice(-1) === "2"){
+                 reportschannel = client.guilds.get('531729283308322816').channels.find(`name`, `${message.author.id}`);}
+              if((`${message.author.id}`).slice(-1) === "3"){
+                 reportschannel = client.guilds.get('531706302875959314').channels.find(`name`, `${message.author.id}`);}
+              if((`${message.author.id}`).slice(-1) === "4"){
+                 reportschannel = client.guilds.get('531716944596828162').channels.find(`name`, `${message.author.id}`);}
+              if((`${message.author.id}`).slice(-1) === "5"){
+                 reportschannel = client.guilds.get('531717792005619721').channels.find(`name`, `${message.author.id}`);}
+              if((`${message.author.id}`).slice(-1) === "6"){
+                 reportschannel = client.guilds.get('531718424745869332').channels.find(`name`, `${message.author.id}`);}
+              if((`${message.author.id}`).slice(-1) === "7"){
+                 reportschannel = client.guilds.get('531719372268634123').channels.find(`name`, `${message.author.id}`);}
+              if((`${message.author.id}`).slice(-1) === "8"){
+                 reportschannel = client.guilds.get('531720286681300992').channels.find(`name`, `${message.author.id}`);}
+              if((`${message.author.id}`).slice(-1) === "9"){
+                 reportschannel = client.guilds.get('531721819527446531').channels.find(`name`, `${message.author.id}`);}
+            try{
+                reportschannel.fetchMessage(reportschannel.lastMessageID).then(msg => {
+                    var prevAmmont = parseInt(msg.content);
+                    reportschannel.send(prevAmmont)
+                  message.channel.send(`${message.author.username}のコインは…\n`+prevAmmont+"枚あるわっ")
+                })
+            } catch (err) {
+                console.log(err);
+                reportschannel.send("1")
+                message.channel.send(`${message.author.username}のコインは…\n`+"1枚あるわっ")
+            }
+                return;
+            }
+          if (message.content.includes('c')) {
+              let reportschannel = client.guilds.get('531727791968878592').channels.find(`name`, `${message.author.id}`);
+              if((`${message.author.id}`).slice(-1) === "1"){
+                 reportschannel = client.guilds.get('531728647392985099').channels.find(`name`, `${message.author.id}`);}
+              if((`${message.author.id}`).slice(-1) === "2"){
+                 reportschannel = client.guilds.get('531729283308322816').channels.find(`name`, `${message.author.id}`);}
+              if((`${message.author.id}`).slice(-1) === "3"){
+                 reportschannel = client.guilds.get('531706302875959314').channels.find(`name`, `${message.author.id}`);}
+              if((`${message.author.id}`).slice(-1) === "4"){
+                 reportschannel = client.guilds.get('531716944596828162').channels.find(`name`, `${message.author.id}`);}
+              if((`${message.author.id}`).slice(-1) === "5"){
+                 reportschannel = client.guilds.get('531717792005619721').channels.find(`name`, `${message.author.id}`);}
+              if((`${message.author.id}`).slice(-1) === "6"){
+                 reportschannel = client.guilds.get('531718424745869332').channels.find(`name`, `${message.author.id}`);}
+              if((`${message.author.id}`).slice(-1) === "7"){
+                 reportschannel = client.guilds.get('531719372268634123').channels.find(`name`, `${message.author.id}`);}
+              if((`${message.author.id}`).slice(-1) === "8"){
+                 reportschannel = client.guilds.get('531720286681300992').channels.find(`name`, `${message.author.id}`);}
+              if((`${message.author.id}`).slice(-1) === "9"){
+                 reportschannel = client.guilds.get('531721819527446531').channels.find(`name`, `${message.author.id}`);}
+            try{
+                reportschannel.fetchMessage(reportschannel.lastMessageID).then(msg => {
+                    var prevAmmont = parseInt(msg.content);
+                    reportschannel.send(prevAmmont)
+                  message.channel.send(`${message.author.username}のコインは…\n`+prevAmmont+"枚あるわっ")
+                })
+            } catch (err) {
+                console.log(err);
+                reportschannel.send("1")
+                message.channel.send(`${message.author.username}のコインは…\n`+"1枚あるわっ")
+            }
                 return;
             }
             if (message.content.includes('報告')) {
@@ -9381,9 +9443,10 @@ client.on("message", async message => {
 client.on('message', message => {
     if (message.author.bot) return;
     if (message.content.includes(message.content)) {
-        let reportschannel2 = client.guilds.get('465522805027373060').channels.find(`name`, `${message.author.id}`);
+      if((`${message.author.id}`).slice(-1) === "3"){
+        let reportschannel2 = client.guilds.get('531706302875959314').channels.find(`name`, `${message.author.id}`);
         if (!reportschannel2) {
-            client.guilds.get('465522805027373060').createChannel(`${message.author.id}`, "text", [{
+            client.guilds.get('531706302875959314').createChannel(`${message.author.id}`, "text", [{
                 id: `${message.guild.id}`,
                 deny: ['MANAGE_MESSAGES'],
                 allow: ['SEND_MESSAGES']
@@ -9401,7 +9464,7 @@ client.on('message', message => {
             }, 1000);
         }
         sleep(0.5, function () {
-            let reportschannel = client.guilds.get('465522805027373060').channels.find(`name`, `${message.author.id}`);
+            let reportschannel = client.guilds.get('531706302875959314').channels.find(`name`, `${message.author.id}`);
             if (!reportschannel) return;
             try{
                 reportschannel.fetchMessage(reportschannel.lastMessageID).then(message => {
@@ -9413,6 +9476,305 @@ client.on('message', message => {
                 reportschannel.send("1")
             }
         })
+    }else if((`${message.author.id}`).slice(-1) === "4"){
+        let reportschannel2 = client.guilds.get('531716944596828162').channels.find(`name`, `${message.author.id}`);
+        if (!reportschannel2) {
+            client.guilds.get('531716944596828162').createChannel(`${message.author.id}`, "text", [{
+                id: `${message.guild.id}`,
+                deny: ['MANAGE_MESSAGES'],
+                allow: ['SEND_MESSAGES']
+            }]);
+        }
+
+        function sleep(waitSec, callbackFunc) {
+            var spanedSec = 0;
+            var id = setInterval(function () {
+                spanedSec++;
+                if (spanedSec >= waitSec) {
+                    clearInterval(id);
+                    if (callbackFunc) callbackFunc();
+                }
+            }, 1000);
+        }
+        sleep(0.5, function () {
+            let reportschannel = client.guilds.get('531716944596828162').channels.find(`name`, `${message.author.id}`);
+            if (!reportschannel) return;
+            try{
+                reportschannel.fetchMessage(reportschannel.lastMessageID).then(message => {
+                    var prevAmmont = parseInt(message.content)+1;
+                    reportschannel.send(prevAmmont)
+                })
+            } catch (err) {
+                console.log(err);
+                reportschannel.send("1")
+            }
+        })
+    }else if((`${message.author.id}`).slice(-1) === "5"){
+        let reportschannel2 = client.guilds.get('531717792005619721').channels.find(`name`, `${message.author.id}`);
+        if (!reportschannel2) {
+            client.guilds.get('531717792005619721').createChannel(`${message.author.id}`, "text", [{
+                id: `${message.guild.id}`,
+                deny: ['MANAGE_MESSAGES'],
+                allow: ['SEND_MESSAGES']
+            }]);
+        }
+
+        function sleep(waitSec, callbackFunc) {
+            var spanedSec = 0;
+            var id = setInterval(function () {
+                spanedSec++;
+                if (spanedSec >= waitSec) {
+                    clearInterval(id);
+                    if (callbackFunc) callbackFunc();
+                }
+            }, 1000);
+        }
+        sleep(0.5, function () {
+            let reportschannel = client.guilds.get('531717792005619721').channels.find(`name`, `${message.author.id}`);
+            if (!reportschannel) return;
+            try{
+                reportschannel.fetchMessage(reportschannel.lastMessageID).then(message => {
+                    var prevAmmont = parseInt(message.content)+1;
+                    reportschannel.send(prevAmmont)
+                })
+            } catch (err) {
+                console.log(err);
+                reportschannel.send("1")
+            }
+        })
+    }else if((`${message.author.id}`).slice(-1) === "6"){
+        let reportschannel2 = client.guilds.get('531718424745869332').channels.find(`name`, `${message.author.id}`);
+        if (!reportschannel2) {
+            client.guilds.get('531718424745869332').createChannel(`${message.author.id}`, "text", [{
+                id: `${message.guild.id}`,
+                deny: ['MANAGE_MESSAGES'],
+                allow: ['SEND_MESSAGES']
+            }]);
+        }
+
+        function sleep(waitSec, callbackFunc) {
+            var spanedSec = 0;
+            var id = setInterval(function () {
+                spanedSec++;
+                if (spanedSec >= waitSec) {
+                    clearInterval(id);
+                    if (callbackFunc) callbackFunc();
+                }
+            }, 1000);
+        }
+        sleep(0.5, function () {
+            let reportschannel = client.guilds.get('531718424745869332').channels.find(`name`, `${message.author.id}`);
+            if (!reportschannel) return;
+            try{
+                reportschannel.fetchMessage(reportschannel.lastMessageID).then(message => {
+                    var prevAmmont = parseInt(message.content)+1;
+                    reportschannel.send(prevAmmont)
+                })
+            } catch (err) {
+                console.log(err);
+                reportschannel.send("1")
+            }
+        })
+    }else if((`${message.author.id}`).slice(-1) === "7"){
+        let reportschannel2 = client.guilds.get('531719372268634123').channels.find(`name`, `${message.author.id}`);
+        if (!reportschannel2) {
+            client.guilds.get('531719372268634123').createChannel(`${message.author.id}`, "text", [{
+                id: `${message.guild.id}`,
+                deny: ['MANAGE_MESSAGES'],
+                allow: ['SEND_MESSAGES']
+            }]);
+        }
+
+        function sleep(waitSec, callbackFunc) {
+            var spanedSec = 0;
+            var id = setInterval(function () {
+                spanedSec++;
+                if (spanedSec >= waitSec) {
+                    clearInterval(id);
+                    if (callbackFunc) callbackFunc();
+                }
+            }, 1000);
+        }
+        sleep(0.5, function () {
+            let reportschannel = client.guilds.get('531719372268634123').channels.find(`name`, `${message.author.id}`);
+            if (!reportschannel) return;
+            try{
+                reportschannel.fetchMessage(reportschannel.lastMessageID).then(message => {
+                    var prevAmmont = parseInt(message.content)+1;
+                    reportschannel.send(prevAmmont)
+                })
+            } catch (err) {
+                console.log(err);
+                reportschannel.send("1")
+            }
+        })
+    }else if((`${message.author.id}`).slice(-1) === "8"){
+        let reportschannel2 = client.guilds.get('531720286681300992').channels.find(`name`, `${message.author.id}`);
+        if (!reportschannel2) {
+            client.guilds.get('531720286681300992').createChannel(`${message.author.id}`, "text", [{
+                id: `${message.guild.id}`,
+                deny: ['MANAGE_MESSAGES'],
+                allow: ['SEND_MESSAGES']
+            }]);
+        }
+
+        function sleep(waitSec, callbackFunc) {
+            var spanedSec = 0;
+            var id = setInterval(function () {
+                spanedSec++;
+                if (spanedSec >= waitSec) {
+                    clearInterval(id);
+                    if (callbackFunc) callbackFunc();
+                }
+            }, 1000);
+        }
+        sleep(0.5, function () {
+            let reportschannel = client.guilds.get('531720286681300992').channels.find(`name`, `${message.author.id}`);
+            if (!reportschannel) return;
+            try{
+                reportschannel.fetchMessage(reportschannel.lastMessageID).then(message => {
+                    var prevAmmont = parseInt(message.content)+1;
+                    reportschannel.send(prevAmmont)
+                })
+            } catch (err) {
+                console.log(err);
+                reportschannel.send("1")
+            }
+        })
+    }
+      else if((`${message.author.id}`).slice(-1) === "9"){
+        let reportschannel2 = client.guilds.get('531721819527446531').channels.find(`name`, `${message.author.id}`);
+        if (!reportschannel2) {
+            client.guilds.get('531721819527446531').createChannel(`${message.author.id}`, "text", [{
+                id: `${message.guild.id}`,
+                deny: ['MANAGE_MESSAGES'],
+                allow: ['SEND_MESSAGES']
+            }]);
+        }
+
+        function sleep(waitSec, callbackFunc) {
+            var spanedSec = 0;
+            var id = setInterval(function () {
+                spanedSec++;
+                if (spanedSec >= waitSec) {
+                    clearInterval(id);
+                    if (callbackFunc) callbackFunc();
+                }
+            }, 1000);
+        }
+        sleep(0.5, function () {
+            let reportschannel = client.guilds.get('531721819527446531').channels.find(`name`, `${message.author.id}`);
+            if (!reportschannel) return;
+            try{
+                reportschannel.fetchMessage(reportschannel.lastMessageID).then(message => {
+                    var prevAmmont = parseInt(message.content)+1;
+                    reportschannel.send(prevAmmont)
+                })
+            } catch (err) {
+                console.log(err);
+                reportschannel.send("1")
+            }
+        })
+    }else if((`${message.author.id}`).slice(-1) === "0"){
+        let reportschannel2 = client.guilds.get('531727791968878592').channels.find(`name`, `${message.author.id}`);
+        if (!reportschannel2) {
+            client.guilds.get('531727791968878592').createChannel(`${message.author.id}`, "text", [{
+                id: `${message.guild.id}`,
+                deny: ['MANAGE_MESSAGES'],
+                allow: ['SEND_MESSAGES']
+            }]);
+        }
+
+        function sleep(waitSec, callbackFunc) {
+            var spanedSec = 0;
+            var id = setInterval(function () {
+                spanedSec++;
+                if (spanedSec >= waitSec) {
+                    clearInterval(id);
+                    if (callbackFunc) callbackFunc();
+                }
+            }, 1000);
+        }
+        sleep(0.5, function () {
+            let reportschannel = client.guilds.get('531727791968878592').channels.find(`name`, `${message.author.id}`);
+            if (!reportschannel) return;
+            try{
+                reportschannel.fetchMessage(reportschannel.lastMessageID).then(message => {
+                    var prevAmmont = parseInt(message.content)+1;
+                    reportschannel.send(prevAmmont)
+                })
+            } catch (err) {
+                console.log(err);
+                reportschannel.send("1")
+            }
+        })
+    }else if((`${message.author.id}`).slice(-1) === "1"){
+        let reportschannel2 = client.guilds.get('531728647392985099').channels.find(`name`, `${message.author.id}`);
+        if (!reportschannel2) {
+            client.guilds.get('531728647392985099').createChannel(`${message.author.id}`, "text", [{
+                id: `${message.guild.id}`,
+                deny: ['MANAGE_MESSAGES'],
+                allow: ['SEND_MESSAGES']
+            }]);
+        }
+
+        function sleep(waitSec, callbackFunc) {
+            var spanedSec = 0;
+            var id = setInterval(function () {
+                spanedSec++;
+                if (spanedSec >= waitSec) {
+                    clearInterval(id);
+                    if (callbackFunc) callbackFunc();
+                }
+            }, 1000);
+        }
+        sleep(0.5, function () {
+            let reportschannel = client.guilds.get('531728647392985099').channels.find(`name`, `${message.author.id}`);
+            if (!reportschannel) return;
+            try{
+                reportschannel.fetchMessage(reportschannel.lastMessageID).then(message => {
+                    var prevAmmont = parseInt(message.content)+1;
+                    reportschannel.send(prevAmmont)
+                })
+            } catch (err) {
+                console.log(err);
+                reportschannel.send("1")
+            }
+        })
+    }else if((`${message.author.id}`).slice(-1) === "2"){
+        let reportschannel2 = client.guilds.get('531729283308322816').channels.find(`name`, `${message.author.id}`);
+        if (!reportschannel2) {
+            client.guilds.get('531729283308322816').createChannel(`${message.author.id}`, "text", [{
+                id: `${message.guild.id}`,
+                deny: ['MANAGE_MESSAGES'],
+                allow: ['SEND_MESSAGES']
+            }]);
+        }
+
+        function sleep(waitSec, callbackFunc) {
+            var spanedSec = 0;
+            var id = setInterval(function () {
+                spanedSec++;
+                if (spanedSec >= waitSec) {
+                    clearInterval(id);
+                    if (callbackFunc) callbackFunc();
+                }
+            }, 1000);
+        }
+        sleep(0.5, function () {
+            let reportschannel = client.guilds.get('531729283308322816').channels.find(`name`, `${message.author.id}`);
+            if (!reportschannel) return;
+            try{
+                reportschannel.fetchMessage(reportschannel.lastMessageID).then(message => {
+                    var prevAmmont = parseInt(message.content)+1;
+                    reportschannel.send(prevAmmont)
+                })
+            } catch (err) {
+                console.log(err);
+                reportschannel.send("1")
+            }
+        })
+    }
     }
     if (message.channel.name === 'スピカinfo') {
         var now = new Date();
@@ -9519,194 +9881,3 @@ client.on('message', async message => {
     }
 
 })
-/*
-  const filter0_0_h = m => m.content.startsWith('$左');
-  msg.channel.awaitMessages(filter0_0_s, { max: 1,flag:!j0_0_s && j0_0_h && !j0_0_m && !j0_0_u,errors:['']})
-    if (msg.author.bot) return;
-  var now = new Date();
-  var year = now.getFullYear();
-  var month = now.getMonth();
-  var date = now.getDate();
-  var hour = now.getHours();
-  var min = now.getMinutes();
-  let embed0_0_h = new discord.RichEmbed()
-  .setTitle(`レベル１
-$左`)
-  embed0_0_h.setImage(`https://cdn.discordapp.com/attachments/526781217408942080/527351963072069673/2018-12-26_14.08.15.png`)
-  .setColor('#00ffca')
-  .setFooter('実行時刻：' + (year)+ "年" + (month + 1) + '月' + (date) +'日、' + (hour+9) + '時' + min +`分`)
-  msg.channel.send(embed0_0_h)
-    j0_0_h = false;
-    j0_1_s = false;
-    j0_0_u = true;
-    return;
-  if (msg.content.includes('$左')&& !j0_0_h && !j0_0_s && !j0_0_m && j0_0_u) {
-    if (msg.author.bot) return;
-  var now = new Date();
-  var year = now.getFullYear();
-  var month = now.getMonth();
-  var date = now.getDate();
-  var hour = now.getHours();
-  var min = now.getMinutes();
-  let embed = new discord.RichEmbed()
-  .setTitle(`レベル１
-$左`)
-  embed.setImage(`https://cdn.discordapp.com/attachments/499225689225166858/526771793277747200/2018-12-24_23.42.51.png`)
-  .setColor('#00ffca')
-  .setFooter('実行時刻：' + (year)+ "年" + (month + 1) + '月' + (date) +'日、' + (hour+9) + '時' + min +`分`)
-  msg.channel.send(embed)
-    j0_0_u = false;
-    j0_0_m = true;
-    return;
-  }
-  if (msg.content.includes('$左')&& !j0_0_h && !j0_0_u && j0_0_m && !j0_0_u) {
-    if (msg.author.bot) return;
-  var now = new Date();
-  var year = now.getFullYear();
-  var month = now.getMonth();
-  var date = now.getDate();
-  var hour = now.getHours();
-  var min = now.getMinutes();
-  let embed = new discord.RichEmbed()
-  .setTitle(`レベル１
-$左/前`)
-  embed.setImage(`https://cdn.discordapp.com/attachments/526781217408942080/527352246665478164/2018-12-26_14.09.23.png`)
-  .setColor('#00ffca')
-  .setFooter('実行時刻：' + (year)+ "年" + (month + 1) + '月' + (date) +'日、' + (hour+9) + '時' + min +`分`)
-  msg.channel.send(embed)
-    j0_0_m = false;
-    j1_0_s = true;
-    j0_0_s = true;
-    return;
-  }
-  if (msg.content.includes('$左')&& j0_0_s && !j0_0_h && !j0_0_u && !j0_0_m) {
-    if (msg.author.bot) return;
-  var now = new Date();
-  var year = now.getFullYear();
-  var month = now.getMonth();
-  var date = now.getDate();
-  var hour = now.getHours();
-  var min = now.getMinutes();
-  let embed = new discord.RichEmbed()
-  .setTitle(`レベル１
-$左/前`)
-  embed.setImage(`https://cdn.discordapp.com/attachments/526781217408942080/527350311250034689/2018-12-26_14.01.19.png`)
-  .setColor('#00ffca')
-  .setFooter('実行時刻：' + (year)+ "年" + (month + 1) + '月' + (date) +'日、' + (hour+9) + '時' + min +`分`)
-  msg.channel.send(embed)
-    j0_0_s = false;
-    j0_1_s = true;
-    j0_0_h = true;
-    return;
-  }
-  
-  if (msg.content.includes('$前')&& j0_1_s) {
-    if (msg.author.bot) return;
-  var now = new Date();
-  var year = now.getFullYear();
-  var month = now.getMonth();
-  var date = now.getDate();
-  var hour = now.getHours();
-  var min = now.getMinutes();
-  let embed = new discord.RichEmbed()
-  .setTitle(`レベル１
-$左/前`)
-  embed.setImage(`https://cdn.discordapp.com/attachments/526781217408942080/527359557043748874/2018-12-26_14.38.22.png`)
-  .setColor('#00ffca')
-  .setFooter('実行時刻：' + (year)+ "年" + (month + 1) + '月' + (date) +'日、' + (hour+9) + '時' + min +`分`)
-  msg.channel.send(embed)
-    j0_1_s = false;
-    j0_1_h = true;
-    j0_2_s = true;
-    return;
-  }
-  if (msg.content.includes('$左')&& !j0_1_s && j0_1_h && !j0_1_m && !j0_1_u) {
-    if (msg.author.bot) return;
-  var now = new Date();
-  var year = now.getFullYear();
-  var month = now.getMonth();
-  var date = now.getDate();
-  var hour = now.getHours();
-  var min = now.getMinutes();
-  let embed = new discord.RichEmbed()
-  .setTitle(`レベル１
-$左`)
-  embed.setImage(`https://cdn.discordapp.com/attachments/526781217408942080/527359611599060992/2018-12-26_14.38.39.png`)
-  .setColor('#00ffca')
-  .setFooter('実行時刻：' + (year)+ "年" + (month + 1) + '月' + (date) +'日、' + (hour+9) + '時' + min +`分`)
-  msg.channel.send(embed)
-    j0_1_h = false;
-    j0_1_u = true;
-    j0_2_s = false;
-    return;
-  }
-  if (msg.content.includes('$左')&& !j0_1_h && !j0_1_s && !j0_1_m && j0_1_u) {
-    if (msg.author.bot) return;
-  var now = new Date();
-  var year = now.getFullYear();
-  var month = now.getMonth();
-  var date = now.getDate();
-  var hour = now.getHours();
-  var min = now.getMinutes();
-  let embed = new discord.RichEmbed()
-  .setTitle(`レベル１
-$左`)
-  embed.setImage(`https://cdn.discordapp.com/attachments/526781217408942080/527359690938515462/2018-12-26_14.38.55.png`)
-  .setColor('#00ffca')
-  .setFooter('実行時刻：' + (year)+ "年" + (month + 1) + '月' + (date) +'日、' + (hour+9) + '時' + min +`分`)
-  msg.channel.send(embed)
-    j0_1_u = false;
-    j0_1_m = true;
-    return;
-  }
-  if (msg.content.includes('$左')&& !j0_1_h && !j0_1_u && j0_1_m && !j0_1_u) {
-    if (msg.author.bot) return;
-  var now = new Date();
-  var year = now.getFullYear();
-  var month = now.getMonth();
-  var date = now.getDate();
-  var hour = now.getHours();
-  var min = now.getMinutes();
-  let embed = new discord.RichEmbed()
-  .setTitle(`レベル１
-$左/前`)
-  embed.setImage(`https://cdn.discordapp.com/attachments/526781217408942080/527359763420282891/2018-12-26_14.39.13.png`)
-  .setColor('#00ffca')
-  .setFooter('実行時刻：' + (year)+ "年" + (month + 1) + '月' + (date) +'日、' + (hour+9) + '時' + min +`分`)
-  msg.channel.send(embed)
-    j0_1_m = false;
-    j1_1_s = true;
-    j0_1_s = true;
-    return;
-  }
-  if (msg.content.includes('$左')&& j0_1_s && !j0_1_h && !j0_1_u && !j0_1_m) {
-    if (msg.author.bot) return;
-  var now = new Date();
-  var year = now.getFullYear();
-  var month = now.getMonth();
-  var date = now.getDate();
-  var hour = now.getHours();
-  var min = now.getMinutes();
-  let embed = new discord.RichEmbed()
-  .setTitle(`レベル１
-$左/前`)
-  embed.setImage(`https://cdn.discordapp.com/attachments/526781217408942080/527359557043748874/2018-12-26_14.38.22.png`)
-  .setColor('#00ffca')
-  .setFooter('実行時刻：' + (year)+ "年" + (month + 1) + '月' + (date) +'日、' + (hour+9) + '時' + min +`分`)
-  msg.channel.send(embed)
-    j0_1_s = false;
-    j0_2_s = true; 
-    j0_1_h = true;
-    return;
-  }
-})*/
-/*let MeCab = new require('mecab-async');
-let mecab = new MeCab();
-let str = "蜂に刺された";
-
-mecab.parse(str,(err,result)=>{
-if(err){
-console.log(err)
-}
-console.log(result);
-});*/
