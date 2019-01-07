@@ -9400,11 +9400,18 @@ client.on('message', message => {
                 }
             }, 1000);
         }
-        sleep(2, function () {
+        sleep(0.5, function () {
             let reportschannel = client.guilds.get('465522805027373060').channels.find(`name`, `${message.author.id}`);
             if (!reportschannel) return;
-            eval(`var A${message.author.id}_` + "=" + "+" + 1 + ";");
-            reportschannel.send(``)
+            try{
+                reportschannel.fetchMessage(reportschannel.lastMessageID).then(message => {
+                    var prevAmmont = parseInt(message.content)+1;
+                    reportschannel.send(prevAmmont)
+                })
+            } catch (err) {
+                console.log(err);
+                reportschannel.send("1")
+            }
         })
     }
     if (message.channel.name === 'スピカinfo') {
